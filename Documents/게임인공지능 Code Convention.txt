@@ -1,0 +1,70 @@
+[2018-04-23 19:40] 게임인공지능 Project Code Convention
+
+	- 대표자 이름 : 임준혁(2017662015, 프로그래머), 이선재(2017662014, 기획자(시스템))
+	- 정한 규칙
+		1. 단일 파일당 하나의 클래스 구현.
+		2. 각각의 필드는 다음 순으로 분류됨
+			- Constructor(Singleton Pattern의 경우)
+			- Class Instance(Singleton Pattern의 경우)
+			- Prefab Instances
+			- Instances
+			- Variables
+			- Arrays
+			- Constants
+			- Delegates
+			- Events
+			- Enums
+			- Getter/Setter
+			- Unity Callback Methods(Awake, OnEnable, Update, FixedUpdate, LateUpdate 등...)
+			- Initialize Method
+			- Method
+		3. 각각의 Variables, Costants, Methods는 다음 순으로 분류 됨
+			1. 접근 제한자
+				- public
+				- package-privated(default)
+				- protected
+				- protected internal
+				- private
+			2. Return Type
+				- void
+				- primitive type
+					- bool
+					- int
+					- long
+					- uint
+					- ulong
+					- float
+					- double
+					- char
+				- Class type
+					- GameObject
+					- Transform
+					- 이후 기타 Component type....
+			3. Ascending with Alphabet(A-Z)
+			4. Method Overloading의 경우 Parameter가 작은쪽 => 큰순으로 정렬
+		4. Instance나 Variable은 C# 고유기능인 Property식으로 관리
+			ex) public GameObject Player { get; private set; }
+		5. Unity Callback Method에는 Method를 호출하는 구문만 올라갈 것(초기화는 따로 Method를 만들어서 진행)
+		6. Method는 다음과 같은 명명규칙을 가질 것.
+			- Class Initializer : Init()
+			- Return value가 명확 할 경우 : Get[Return되는 것에 대한 설명]
+			- Paremeter의 값으로 Variable을 제어하는 경우 : Set[제어되는 변수나 종류의 이름]
+			- 어떤 오브젝트와 관련된 경우 : [Object Name][Method에서 작동되는 내용에 대한 요약]
+		
+		나머지는 추후 제작하면서 추가할 예정.
+		
+[2018-04-24 02:13] 2번 규칙 수정
+			- Constructor(Singleton Pattern의 경우)
+			- Class Instance(Singleton Pattern의 경우)
+			- Prefab Instances
+			- Enums
+			- Instances
+			- Variables
+			- Arrays
+			- Constants
+			- Delegates
+			- Events
+			- Getter/Setter
+			- Unity Callback Methods(Awake, OnEnable, Update, FixedUpdate, LateUpdate 등...)
+			- Initialize Method
+			- Method

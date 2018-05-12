@@ -1,0 +1,8 @@
+[2018-04-23 20:30] 게임인공지능 Project File Convention
+
+	- 대표자 이름 : 임준혁(2017662015, 프로그래머), 김찬혁(2017662007, 아트), 박찬민(2017662034, 기획자(아트))
+	- 정한 규칙
+		1. File Name : [File Name]_[File Type].[Extension]
+			=> 파일 이름 - 파일 종류순으로 Camel case로 작성하고, 구별은 Underbar(_)를 사용해서 구분짓게 함
+						ex) Player_SpriteMap.png
+		2. Resoultion : WXGA Portrate(720 * 1280)
