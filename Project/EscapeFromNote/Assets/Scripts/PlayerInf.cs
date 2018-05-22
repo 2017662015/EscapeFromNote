@@ -18,7 +18,7 @@ public class PlayerInf : Character
     private int skillCount;
     private int eraserCount;
 
-    //Constants
+    //Constants 
     private readonly int PLAYER_HP = 7;
     private readonly int PLAYER_SKILLCNT = 3;
     private readonly int PLAYER_ERASERINIT = 3;
@@ -54,21 +54,7 @@ public class PlayerInf : Character
         checkState = StartCoroutine(CheckState());
     }
 
-    //Methods
-    private void EraserInit()
-    {
-        do
-        {
-            erasers.Add(AddEraser());
-            eraserCount++;
-        } while (erasers.Count != PLAYER_ERASERMAX);
-        erasers[PLAYER_ERASERINIT].SetActive(false);
-    }
-    private GameObject AddEraser()
-    {
-        return Instantiate<GameObject>(prefab_eraser);
-    }
-
+    //State Machine Callbacks
     protected override void OnInit()
     {
         //TODO: Player 생성시 동작할 Function을 구현해 주세요.
@@ -96,6 +82,21 @@ public class PlayerInf : Character
         //TODO: Player가 Die상태일때 동작할 Function을 구현해주세요.   
     }
 
+    //Methods
+    private void EraserInit()
+    {
+        do
+        {
+            erasers.Add(AddEraser());
+            eraserCount++;
+        } while (erasers.Count != PLAYER_ERASERMAX);
+        erasers[PLAYER_ERASERINIT].SetActive(false);
+    }
+    private GameObject AddEraser()
+    {
+        return Instantiate<GameObject>(prefab_eraser);
+    }
+    
     //Coroutines
     protected override IEnumerator CheckState()
     {
@@ -104,6 +105,7 @@ public class PlayerInf : Character
             if (previousState != currentState)
             {
                 previousState = currentState;
+                
                 switch (currentState)
                 {
                     case BehaviourState.INIT:

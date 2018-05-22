@@ -29,12 +29,12 @@ public class PlayerManagement : MonoBehaviour
 
     public static void SetMGameState(GameManagement.GameState state) { mGameState = state; }
 
-    public void OnEnable()
+    private void OnEnable()
     {
         Init();
     }
 
-    public void Init()
+    private void Init()
     {
         prefab_player = Resources.Load("Prefabs/Player") as GameObject;
         PlayerSpawnPos = GameObject.Find("PlayerSpawnPos").transform;
@@ -43,7 +43,7 @@ public class PlayerManagement : MonoBehaviour
         StartCoroutine(CheckState());
     }
 
-    public void SpawnPlayer(Transform spawnPos)
+    private void SpawnPlayer(Transform spawnPos)
     {
         if (!player)
         {
@@ -53,6 +53,14 @@ public class PlayerManagement : MonoBehaviour
         else
         {
             Debug.Log("Player is already spawned in the world!");
+        }
+    }
+    private void DestroyPlayer()
+    {
+        if (player)
+        {
+            Destroy(player);
+            player = null;
         }
     }
 
