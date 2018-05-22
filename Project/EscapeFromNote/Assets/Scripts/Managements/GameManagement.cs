@@ -86,9 +86,11 @@ public class GameManagement : MonoBehaviour {
     {
         playerManager = SpawnManager<PlayerManagement>();
         mGameState = GameState.TITLE;
+        //TODO: 추후에 변경해줄 것.
     }
     private void OnTitle()
     {
+        mGameState = GameState.PLAY;
     }
     private void OnOption()
     {
@@ -96,7 +98,7 @@ public class GameManagement : MonoBehaviour {
     }
     private void OnPlay()
     {
-        //TODO: 게임 최초 시작시 동작할 기능을 넣어주세요.
+        
     }
     private void OnPause()
     {
@@ -180,6 +182,7 @@ public class GameManagement : MonoBehaviour {
                         OnFinalize();
                         break;
                 }
+                PlayerManagement.SetMGameState(mGameState);
             }
             yield return null;
         } while (true);
