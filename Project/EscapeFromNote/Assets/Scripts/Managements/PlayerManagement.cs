@@ -49,6 +49,8 @@ public class PlayerManagement : MonoBehaviour
         {
             player = Instantiate<GameObject>(prefab_player, spawnPos.position, spawnPos.rotation, spawnPos);
             player.name = "Player";
+            player.GetComponent<PlayerInf>().enabled = true;
+            player.GetComponent<PlayerMove>().enabled = true;
         }
         else
         {

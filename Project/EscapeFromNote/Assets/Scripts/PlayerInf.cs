@@ -10,38 +10,56 @@ public class PlayerInf : Character
 
     //Instance
     private Coroutine checkState;
-
+    private Coroutine checkEraserCount;
+    private Transform eraserPosAxis;
     private List<GameObject> erasers = new List<GameObject>();
     private List<Transform> eraserPoses = new List<Transform>();
 
     //Variables
     private int skillCount;
-    private int eraserCount;
+    private int eraserCount = 0;
+    private int previousEraserCount = 0;
 
     //Constants 
-    private readonly int PLAYER_HP = 7;
-    private readonly int PLAYER_SKILLCNT = 3;
-    private readonly int PLAYER_ERASERINIT = 3;
-    private readonly int PLAYER_ERASERMAX = 4;
-    private readonly float MOVE_SPEED = 1.5f;
-    private readonly float ITEM_REMAIN_LENGTH = 60.0f;
+    private const int PLAYER_HP = 7;
+    private const int PLAYER_SKILLCNT = 3;
+    private const int PLAYER_ERASERINIT = 3;
+    private const int PLAYER_ERASERMAX = 4;
+    private const float MOVE_SPEED = 1.5f;
+    private const float ROTATION_SPEED = 300.0F;
+    public const float ITEM_REMAIN_LENGTH = 60.0f;
 
     //Unity Callback Methods
     private void OnEnable()
     {
         Init();
     }
+    private void LateUpdate()
+    {
+        if(currentState != BehaviourState.DIE || currentState != BehaviourState.INIT)
+        {
+            RotatePosEraserAxis();
+        }
+    }
     protected override void OnCollisionEnter(Collision coll)
     {
         base.OnCollisionEnter(coll);
+        Debug.Log(coll.collider.tag);
         //TODO: 추후 충돌처리 구현 예정
-        if (hp <= 0)
+        if (coll.collider.tag == "Enemy")
         {
-            currentState = BehaviourState.DIE;
+            if (hp <= 0)
+            {
+                currentState = BehaviourState.DIE;
+            }
+            else
+            {
+                currentState = BehaviourState.DAMAGED;
+            }
         }
-        else
+        if (coll.collider.tag == "Item_Eraser" && eraserCount < PLAYER_ERASERMAX)
         {
-            currentState = BehaviourState.DAMAGED;
+            IncreaseEraserCount();
         }
     }
 
@@ -60,6 +78,7 @@ public class PlayerInf : Character
         //TODO: Player 생성시 동작할 Function을 구현해 주세요.
         hp = PLAYER_HP;
         EraserInit();
+        checkEraserCount = StartCoroutine(CheckEraserCount());
     }
     protected override void OnIdle()
     {
@@ -82,21 +101,46 @@ public class PlayerInf : Character
         //TODO: Player가 Die상태일때 동작할 Function을 구현해주세요.   
     }
 
-    //Methods
+    //Methods   
     private void EraserInit()
     {
+        int i = 0;
+        eraserPosAxis = gameObject.transform.GetChild(0);
         do
         {
-            erasers.Add(AddEraser());
-            eraserCount++;
+            eraserPoses.Add(eraserPosAxis.GetChild(i));
+            erasers.Add(AddEraser(eraserPoses[i]));
+            eraserPoses[i].GetComponent<EraserPosesBehaviour>().enabled = true;
+            eraserPoses[i].GetComponent<EraserPosesBehaviour>().SetPlayerPos(transform);
+            i++;
         } while (erasers.Count != PLAYER_ERASERMAX);
-        erasers[PLAYER_ERASERINIT].SetActive(false);
+        eraserPoses[PLAYER_ERASERINIT].gameObject.SetActive(false);
+        eraserCount = i - 1;
+        previousEraserCount = eraserCount;
     }
-    private GameObject AddEraser()
+    private void ResetEraserFormation()
     {
-        return Instantiate<GameObject>(prefab_eraser);
+        Debug.Log("Reformatting Formation");
     }
-    
+    private void SetActiveEraser(int index, bool condition)
+    {
+        eraserPoses[index].gameObject.SetActive(condition);
+        if(condition)
+        {
+            eraserPoses[index].GetComponent<EraserPosesBehaviour>().SetPlayerPos(transform);
+        }
+    }
+    private void RotatePosEraserAxis()
+    {
+        eraserPosAxis.Rotate(new Vector3(0, 0, 1 * Time.deltaTime * ROTATION_SPEED)); 
+    }
+    public void IncreaseEraserCount() { eraserCount++; }
+    public void DecreaseEraserCount() { eraserCount--; }
+    private GameObject AddEraser(Transform position)
+    {
+        return Instantiate<GameObject>(prefab_eraser, position);
+    }
+        
     //Coroutines
     protected override IEnumerator CheckState()
     {
@@ -127,6 +171,26 @@ public class PlayerInf : Character
                         OnDie();
                         break;
                 }
+            }
+            yield return new WaitForEndOfFrame();
+        } while (true);
+    }
+    private IEnumerator CheckEraserCount()
+    {
+        do
+        {
+            if (previousEraserCount != eraserCount)
+            {
+                if(previousEraserCount > eraserCount)
+                {
+                    SetActiveEraser(previousEraserCount - 1, false);
+                }
+                else
+                {
+                    SetActiveEraser(eraserCount - 1, true);
+                }
+                previousEraserCount = eraserCount;
+                ResetEraserFormation();
             }
             yield return new WaitForEndOfFrame();
         } while (true);

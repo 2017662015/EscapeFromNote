@@ -38,8 +38,8 @@ public class PlayerMove : MonoBehaviour
         switch (currentInputType)
         {
             case InputType.KBDMOUSE:
-                inputX = Input.GetAxis("Horizontal");
-                inputY = Input.GetAxis("Vertical");
+                inputX = Input.GetAxis("Horizontal") * Time.deltaTime;
+                inputY = Input.GetAxis("Vertical") * Time.deltaTime;
                 mouseX = Input.GetAxis("Mouse X");
                 mouseY = Input.GetAxis("Mouse Y");
                 MovePlayer();
