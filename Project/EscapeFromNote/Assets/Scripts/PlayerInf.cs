@@ -13,6 +13,7 @@ public class PlayerInf : Character
     private Coroutine checkEraserCount;
     private Transform eraserPosAxis;
     private List<GameObject> erasers = new List<GameObject>();
+    private List<Transform> axises = new List<Transform>();
     private List<Transform> eraserPoses = new List<Transform>();
 
     //Variables
@@ -95,10 +96,14 @@ public class PlayerInf : Character
     protected override void OnDamaged()
     {
         //TODO: Player가 Damage를 받은 상태일때 동작할 Function을 구현해주세요.
+        hp--;
+        Debug.Log(hp);
+        currentState = BehaviourState.IDLE;
     }
     protected override void OnDie()
     {
-        //TODO: Player가 Die상태일때 동작할 Function을 구현해주세요.   
+        //TODO: Player가 Die상태일때 동작할 Function을 구현해주세요.
+        gameObject.SetActive(false);
     }
 
     //Methods   
@@ -108,27 +113,26 @@ public class PlayerInf : Character
         eraserPosAxis = gameObject.transform.GetChild(0);
         do
         {
-            eraserPoses.Add(eraserPosAxis.GetChild(i));
+            axises.Add(eraserPosAxis.GetChild(i));
+            eraserPoses.Add(axises[i].GetChild(0));
             erasers.Add(AddEraser(eraserPoses[i]));
-            eraserPoses[i].GetComponent<EraserPosesBehaviour>().enabled = true;
-            eraserPoses[i].GetComponent<EraserPosesBehaviour>().SetPlayerPos(transform);
             i++;
         } while (erasers.Count != PLAYER_ERASERMAX);
         eraserPoses[PLAYER_ERASERINIT].gameObject.SetActive(false);
         eraserCount = i - 1;
         previousEraserCount = eraserCount;
+        ResetEraserFormation();
     }
     private void ResetEraserFormation()
     {
-        Debug.Log("Reformatting Formation");
+        for(int i = 0; i < eraserCount; i++)
+        {
+            axises[i].localRotation = Quaternion.Euler(new Vector3(0, 0, (360 / eraserCount) * i));
+        }
     }
     private void SetActiveEraser(int index, bool condition)
     {
         eraserPoses[index].gameObject.SetActive(condition);
-        if(condition)
-        {
-            eraserPoses[index].GetComponent<EraserPosesBehaviour>().SetPlayerPos(transform);
-        }
     }
     private void RotatePosEraserAxis()
     {
