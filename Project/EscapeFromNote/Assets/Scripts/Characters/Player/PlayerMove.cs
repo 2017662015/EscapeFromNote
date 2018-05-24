@@ -19,8 +19,8 @@ public class PlayerMove : MonoBehaviour
     private InputType currentInputType;
     private Character.BehaviourState currentState;
 
-    private readonly float MAX_SCREEN_RES_WIDTH, MIN_SCREEN_RES_WIDTH;
-    private readonly float MAX_SCREEN_RES_HEIGHT, MIN_SCREEN_RES_HEIGHT;
+    private readonly float MAX_SCREEN_RES_WIDTH =  360, MIN_SCREEN_RES_WIDTH = -360;
+    private readonly float MAX_SCREEN_RES_HEIGHT = 640, MIN_SCREEN_RES_HEIGHT = -640;
 
     public void SetCurrentInputType(InputType type) { this.currentInputType = type; }
     public void SetCurrentState(Character.BehaviourState state) { this.currentState = state; }
@@ -69,6 +69,12 @@ public class PlayerMove : MonoBehaviour
                 inputY = Input.GetAxis("Vertical") * Time.deltaTime;
                 mouseX = Input.GetAxis("Mouse X");
                 mouseY = Input.GetAxis("Mouse Y");
+                posX += inputX;
+                posY += inputY;
+                float posXLimit = Camera.main.ScreenToWorldPoint(new Vector3(720, 0, 0)).x;
+                float posYLimit = Camera.main.ScreenToWorldPoint(new Vector3(0, 1280, 0)).y;
+                posX = Mathf.Clamp(posX, -posXLimit, posXLimit);
+                posY = Mathf.Clamp(posY, -posYLimit, posYLimit);
                 MovePlayer();
                 break;
             case InputType.TOUCH:
@@ -78,7 +84,9 @@ public class PlayerMove : MonoBehaviour
 
     private void MovePlayer()
     {
-        Vector3 _dir = new Vector3(inputX, inputY);
-        gameObject.transform.position += _dir;   
+        Vector2 _dir = new Vector2(posX, posY);
+        
+        gameObject.transform.position = _dir;
+        Debug.Log(gameObject.transform.position.x);
     }
 }
