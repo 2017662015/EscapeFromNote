@@ -1,5 +1,5 @@
 2018.1.0f2:3.3.0.2
-StandaloneWindows
+Android
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.AIModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.ARModule.dll
@@ -10,8 +10,6 @@ C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.AudioModule.d
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.BaselibModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.ClothModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.CloudWebServicesModule.dll
-C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.ClusterInputModule.dll
-C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.ClusterRendererModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.CoreModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.CrashReportingModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.DirectorModule.dll
@@ -77,6 +75,7 @@ C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Ed
 C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll
 C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll
 C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll
+C:/Program Files/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll
 C:/Users/USER/AppData/Local/Unity/cache/packages/staging-packages.unity.com/com.unity.2d.common@1.0.9-preview/Tests/EditorTests/Lib/NSubstitute/NSubstitute.dll
 C:/Users/USER/AppData/Local/Unity/cache/packages/staging-packages.unity.com/com.unity.ads@2.0.7/Editor/UnityEditor.Advertisements.dll

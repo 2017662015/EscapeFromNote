@@ -35,7 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4634813549964648}
   m_Layer: 0
-  m_Name: bone_13
+  m_Name: Ringfinger_bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4340414853972146}
   m_Layer: 0
-  m_Name: bone_20
+  m_Name: Littlefinger_bone_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4427141934677564}
   m_Layer: 0
-  m_Name: bone_11
+  m_Name: Middlefinger_bone_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4789602650927848}
   m_Layer: 0
-  m_Name: bone_15
+  m_Name: Ringfinger_bone_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4921535262318888}
   m_Layer: 0
-  m_Name: bone_10
+  m_Name: Middlefinger_bone_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4257773258438466}
   m_Layer: 0
-  m_Name: bone_8
+  m_Name: Indexfinger_bone_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,7 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4190180281437340}
   m_Layer: 0
-  m_Name: bone_16
+  m_Name: Ringfinger_bone_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4414829277205096}
   m_Layer: 0
-  m_Name: bone_5
+  m_Name: Indexfinger_bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,7 +185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4492726071343944}
   m_Layer: 0
-  m_Name: bone_17
+  m_Name: Littlefinger_bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,7 +215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4449369562575610}
   m_Layer: 0
-  m_Name: bone_7
+  m_Name: Indexfinger_bone_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -245,7 +245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4868894152265856}
   m_Layer: 0
-  m_Name: bone_9
+  m_Name: Middlefinger_bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -275,7 +275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4307887173925232}
   m_Layer: 0
-  m_Name: bone_19
+  m_Name: Littlefinger_bone_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -290,7 +290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4356478634974076}
   m_Layer: 0
-  m_Name: bone_6
+  m_Name: Indexfinger_bone_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -305,7 +305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4657103648917954}
   m_Layer: 0
-  m_Name: bone_12
+  m_Name: Middlefinger_bone_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -350,7 +350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4221495930526458}
   m_Layer: 0
-  m_Name: bone_14
+  m_Name: Ringfinger_bone_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -410,7 +410,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4672632987086406}
   m_Layer: 0
-  m_Name: bone_18
+  m_Name: Littlefinger_bone_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,11 +471,12 @@ GameObject:
   - component: {fileID: 4846159735719746}
   - component: {fileID: 135984828894876422}
   - component: {fileID: 212875007134198464}
-  - component: {fileID: 114452060115799218}
   - component: {fileID: 114612076426115806}
+  - component: {fileID: 114322941798797264}
   - component: {fileID: 114105446374795344}
   - component: {fileID: 114016234043437156}
   - component: {fileID: 54857325306597860}
+  - component: {fileID: 95104024218092646}
   m_Layer: 5
   m_Name: Player
   m_TagString: Player
@@ -503,15 +504,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1783928982313924}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7128784, w: 0.7012876}
+  m_LocalRotation: {x: -0.00000001045, y: 0.000000010622716, z: 0.7128784, w: 0.7012876}
   m_LocalPosition: {x: 0.45138916, y: -3.4809027, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4634813549964648}
-  - {fileID: 4492726071343944}
-  - {fileID: 4414829277205096}
-  - {fileID: 4868894152265856}
   - {fileID: 4239883790023470}
+  - {fileID: 4414829277205096}
+  - {fileID: 4634813549964648}
+  - {fileID: 4868894152265856}
+  - {fileID: 4492726071343944}
   m_Father: {fileID: 4846159735719746}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -571,7 +572,7 @@ Transform:
   m_Children:
   - {fileID: 4417912716396370}
   m_Father: {fileID: 4134029183716108}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4256955356121196
 Transform:
@@ -706,7 +707,7 @@ Transform:
   m_Children:
   - {fileID: 4356478634974076}
   m_Father: {fileID: 4134029183716108}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4417912716396370
 Transform:
@@ -775,7 +776,7 @@ Transform:
   m_Children:
   - {fileID: 4672632987086406}
   m_Father: {fileID: 4134029183716108}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4575972954229352
 Transform:
@@ -802,7 +803,7 @@ Transform:
   m_Children:
   - {fileID: 4221495930526458}
   m_Father: {fileID: 4134029183716108}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4657103648917954
 Transform:
@@ -931,6 +932,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 2
+--- !u!95 &95104024218092646
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1997847941588888}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a1fee6f3057ee95459b6b1351ed18627, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114016234043437156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -953,7 +972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b2bb819f2899c4c8e0bcd75803a19a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114452060115799218
+--- !u!114 &114322941798797264
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -964,28 +983,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c008f954fe54a8bb972de1018a2cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RootBone: {fileID: 4134029183716108}
+  m_RootBone: {fileID: 4846159735719746}
   m_BoneTransforms:
-  - {fileID: 4134029183716108}
-  - {fileID: 4634813549964648}
+  - {fileID: 4846159735719746}
+  - {fileID: 4868894152265856}
   - {fileID: 4492726071343944}
   - {fileID: 4414829277205096}
-  - {fileID: 4868894152265856}
+  - {fileID: 4634813549964648}
   - {fileID: 4239883790023470}
-  - {fileID: 4221495930526458}
+  - {fileID: 4921535262318888}
   - {fileID: 4672632987086406}
   - {fileID: 4356478634974076}
-  - {fileID: 4921535262318888}
+  - {fileID: 4221495930526458}
   - {fileID: 4417912716396370}
-  - {fileID: 4789602650927848}
-  - {fileID: 4307887173925232}
-  - {fileID: 4449369562575610}
   - {fileID: 4427141934677564}
+  - {fileID: 0}
+  - {fileID: 4449369562575610}
+  - {fileID: 4789602650927848}
   - {fileID: 4378237936148414}
-  - {fileID: 4190180281437340}
+  - {fileID: 4657103648917954}
   - {fileID: 4340414853972146}
   - {fileID: 4257773258438466}
-  - {fileID: 4657103648917954}
+  - {fileID: 4190180281437340}
   - {fileID: 4472407262729794}
 --- !u!114 &114612076426115806
 MonoBehaviour:
