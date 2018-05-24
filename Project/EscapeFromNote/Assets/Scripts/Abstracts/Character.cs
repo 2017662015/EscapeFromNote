@@ -5,7 +5,7 @@ using UnityEngine.Internal;
 
 public abstract class Character : MonoBehaviour
 {
-    [HideInInspector] public enum BehaviourState { INIT = -1, IDLE, MOVE, ATTACK, DAMAGED, DIE };
+    [HideInInspector] public enum BehaviourState { INIT = -1, IDLE, MOVE, ATTACK, DAMAGED, DIE, NEXTSTAGE };
 
     //Variables
     protected int hp;
@@ -19,6 +19,7 @@ public abstract class Character : MonoBehaviour
     protected abstract void OnAttack();
     protected abstract void OnDamaged();
     protected abstract void OnDie();
+    protected abstract void OnNextStage();
 
     protected virtual void OnCollisionEnter(Collision coll) { }
 

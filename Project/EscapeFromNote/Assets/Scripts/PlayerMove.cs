@@ -6,11 +6,16 @@ public class PlayerMove : MonoBehaviour
 
     public enum InputType { KBDMOUSE, TOUCH };
 
+    private PlayerInf playerInf;
+
     private float inputX;
     private float inputY;
+    private float posX;
+    private float posY;
     private float mouseX;
     private float mouseY;
-    private Animator anim;
+
+
     private InputType currentInputType;
     private Character.BehaviourState currentState;
 
@@ -20,10 +25,15 @@ public class PlayerMove : MonoBehaviour
     public void SetCurrentInputType(InputType type) { this.currentInputType = type; }
     public void SetCurrentState(Character.BehaviourState state) { this.currentState = state; }
 
+    private void OnEnable()
+    {
+        Init();
+    }
+
     private void Init()
     {
         currentState = Character.BehaviourState.INIT;
-        anim = gameObject.GetComponent<Animator>();
+        playerInf = gameObject.GetComponent<PlayerInf>();
     }
 
 
@@ -32,6 +42,20 @@ public class PlayerMove : MonoBehaviour
         if (currentState != Character.BehaviourState.DIE)
         {
             GetInput();
+        }
+    }
+    private void FixedUpdate()
+    {
+        if (currentState != Character.BehaviourState.DIE && currentState != Character.BehaviourState.DAMAGED)
+        {
+            if (inputX != 0 || inputY != 0)
+            {
+                playerInf.SetCurrentState(Character.BehaviourState.MOVE);
+            }
+            else
+            {
+                playerInf.SetCurrentState(Character.BehaviourState.IDLE);
+            }
         }
     }
 

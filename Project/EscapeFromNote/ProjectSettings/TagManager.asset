@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Eraser
   - Enemy
-  - Item_Eraser
+  - Item_PencilCase
   layers:
   - Default
   - TransparentFX
