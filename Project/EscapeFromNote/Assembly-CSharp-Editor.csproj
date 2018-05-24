@@ -149,20 +149,45 @@
       <HintPath>C:/Users/User/Documents/2017662007/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/com.unity.2d.animation.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.StandardEvents">
+<<<<<<< HEAD
       <HintPath>C:/Users/User/Documents/2017662007/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.2d.ik.Editor">
       <HintPath>C:/Users/User/Documents/2017662007/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/com.unity.2d.ik.Editor.dll</HintPath>
     </Reference>
+=======
+      <HintPath>C:/Users/User/Documents/2017662015/Unity/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.2d.ik.Editor">
+      <HintPath>C:/Users/User/Documents/2017662015/Unity/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/com.unity.2d.ik.Editor.dll</HintPath>
+    </Reference>
+>>>>>>> e8bc2aa43ad02d4a77f1f87ddfe5e9de9e3b320e
     <Reference Include="com.unity.2d.ik.Runtime">
       <HintPath>C:/Users/User/Documents/2017662007/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/com.unity.2d.ik.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
+<<<<<<< HEAD
       <HintPath>C:/Users/User/Documents/2017662007/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+=======
+      <HintPath>C:/Users/User/Documents/2017662015/Unity/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InternalAPIEngineBridge.001">
+      <HintPath>C:/Users/User/Documents/2017662015/Unity/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.2d.common.Runtime">
+      <HintPath>C:/Users/User/Documents/2017662015/Unity/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/com.unity.2d.common.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.2d.animation.Editor">
+      <HintPath>C:/Users/User/Documents/2017662015/Unity/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/com.unity.2d.animation.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.2d.triangle.Runtime">
+      <HintPath>C:/Users/User/Documents/2017662015/Unity/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/com.unity.2d.triangle.Runtime.dll</HintPath>
+>>>>>>> e8bc2aa43ad02d4a77f1f87ddfe5e9de9e3b320e
     </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.001">
       <HintPath>C:/Users/User/Documents/2017662007/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="com.unity.2d.common.Runtime">
       <HintPath>C:/Users/User/Documents/2017662007/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/com.unity.2d.common.Runtime.dll</HintPath>
     </Reference>
@@ -178,6 +203,11 @@
     <Reference Include="Unity.InternalAPIEditorBridge.001">
       <HintPath>C:/Users/User/Documents/2017662007/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
     </Reference>
+=======
+    <Reference Include="Unity.InternalAPIEditorBridge.001">
+      <HintPath>C:/Users/User/Documents/2017662015/Unity/EscapeFromNote/Project/EscapeFromNote/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
+    </Reference>
+>>>>>>> e8bc2aa43ad02d4a77f1f87ddfe5e9de9e3b320e
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>
