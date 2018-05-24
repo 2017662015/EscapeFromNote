@@ -25,6 +25,8 @@ public class PlayerMove : MonoBehaviour
     public void SetCurrentInputType(InputType type) { this.currentInputType = type; }
     public void SetCurrentState(Character.BehaviourState state) { this.currentState = state; }
 
+    private Animator anim;
+
     private void OnEnable()
     {
         Init();
@@ -34,6 +36,7 @@ public class PlayerMove : MonoBehaviour
     {
         currentState = Character.BehaviourState.INIT;
         playerInf = gameObject.GetComponent<PlayerInf>();
+        anim = gameObject.GetComponent<Animator>();
     }
 
 
@@ -65,7 +68,7 @@ public class PlayerMove : MonoBehaviour
         {
             case InputType.KBDMOUSE:
                 inputX = Input.GetAxis("Horizontal") * Time.deltaTime;
-                //anim.SetFloat("Horizontal", inputX);
+                anim.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
                 inputY = Input.GetAxis("Vertical") * Time.deltaTime;
                 mouseX = Input.GetAxis("Mouse X");
                 mouseY = Input.GetAxis("Mouse Y");
