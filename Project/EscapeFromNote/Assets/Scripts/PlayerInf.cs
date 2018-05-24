@@ -26,7 +26,7 @@ public class PlayerInf : Character
     private const int PLAYER_ERASERINIT = 3;
     private const int PLAYER_ERASERMAX = 4;
     private const float MOVE_SPEED = 1.5f;
-    private const float ROTATION_SPEED = 300.0F;
+    private const float ROTATION_SPEED = 100.0F;
     public const float ITEM_REMAIN_LENGTH = 60.0f;
 
     //Unity Callback Methods
