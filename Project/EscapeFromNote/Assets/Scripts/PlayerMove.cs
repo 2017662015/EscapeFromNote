@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
     private float inputY;
     private float mouseX;
     private float mouseY;
+    private Animator anim;
     private InputType currentInputType;
     private Character.BehaviourState currentState;
 
@@ -22,6 +23,7 @@ public class PlayerMove : MonoBehaviour
     private void Init()
     {
         currentState = Character.BehaviourState.INIT;
+        anim = gameObject.GetComponent<Animator>();
     }
 
 
@@ -39,6 +41,7 @@ public class PlayerMove : MonoBehaviour
         {
             case InputType.KBDMOUSE:
                 inputX = Input.GetAxis("Horizontal") * Time.deltaTime;
+                //anim.SetFloat("Horizontal", inputX);
                 inputY = Input.GetAxis("Vertical") * Time.deltaTime;
                 mouseX = Input.GetAxis("Mouse X");
                 mouseY = Input.GetAxis("Mouse Y");
