@@ -191,8 +191,11 @@
      <Compile Include="Assets\Externals\NGUI\Scripts\UI\UITexture.cs" />
      <Compile Include="Assets\Externals\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\Externals\NGUI\Scripts\UI\UIViewport.cs" />
-     <Compile Include="Assets\Scripts\Character\Interface\Character.cs" />
+     <Compile Include="Assets\Scripts\Character\Abstract\Character.cs" />
+     <Compile Include="Assets\Scripts\Character\Player\PlayerAnim.cs" />
      <Compile Include="Assets\Scripts\Character\Player\PlayerInf.cs" />
+     <Compile Include="Assets\Scripts\Character\Player\PlayerMove.cs" />
+     <Compile Include="Assets\Scripts\Test\Character\Player\MovementTest.cs" />
      <None Include="Assets\Externals\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
      <None Include="Assets\Externals\NGUI\ReadMe - 3.12.0.txt" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Transparent Masked 1.shader" />

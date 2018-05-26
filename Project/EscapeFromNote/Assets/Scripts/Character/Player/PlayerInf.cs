@@ -3,45 +3,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInf : Character {
+public class PlayerInf : Character
+{
     //Prefabs
     private GameObject prefab_eraser;
     private GameObject prefab_white;
 
-    //Enums
-    private enum PlayerWeapon { ERASER, WHITE };
-
     //Instances
-    private GameObject white;
     private Transform weaponAxis;
-    private Coroutine checkPlayerWeapon;
-    private List<GameObject> eraser;
+    private Coroutine checkEraserCount;
+    private PlayerAnim playerAnim;
+    private PlayerMove playerMove;
+    private List<GameObject> erasers;
     private List<Transform> eraserPosAxises;
     private List<Transform> eraserPoses;
 
     //Variables
-    private int currentEraserCount = 0;
-    private int eraserSpaceCount = 0;
-    private float whiteElapsedTime = 0.0f;
+    private bool isWhiteEquipped;
+    private bool isPencilCaseEquipped;
+    [SerializeField][Range(1, 4)]private int currentEraserCount = 0;
+    private int previousEraserCount = 0;
+    [SerializeField][Range(3, 4)]private int eraserSpaceCount = 0;
+    [SerializeField]private float whiteSpawnElapsedTime = 0.0f;
     private float eraserSpawnElapsedTime = 0.0f;
-    private PlayerWeapon currentWeaponState;
-    private PlayerWeapon previousWeaponState;
-    
     //Constants
     private const int PLAYER_ERASER_COUNT_INIT = 3;
     private const int PLAYER_ERASER_COUNT_MAX = 4;
     private const int PLAYER_HP_INIT = 7;
-    private const int PLAYER_SKILL_COUNT_INIT = 3;
     private const float PLAYER_ERASER_SPAWN_TIME = 10.0f;
     private const float PLAYER_WEAPON_ROTATION_SPEED = 100.0f;
-    private const float PLAYER_WHITE_DURATION_TIME = 60.0f;
+    private const float PLAYER_WHITE_SPAWN_TIME = 30.0f;
 
     //Unity Callback Methods
     private void OnEnable()
     {
         Init();
     }
-    
+    private void LateUpdate()
+    {
+        RotateWeaponAxis();
+    }
+    private void FixedUpdate()
+    {
+        SpawnWhite();
+    }
+
     protected override void OnCollisionEnter2D(Collision2D coll)
     {
         base.OnCollisionEnter2D(coll);
@@ -53,34 +59,33 @@ public class PlayerInf : Character {
     protected override void Init()
     {
         base.Init();
-        currentWeaponState = PlayerWeapon.ERASER;
-        previousWeaponState = currentWeaponState;
+        prefab_eraser = Resources.Load("Prefabs/Eraser") as GameObject;
+        playerAnim = gameObject.GetComponent<PlayerAnim>();
+        playerMove = gameObject.GetComponent<PlayerMove>();
         checkState = StartCoroutine(CheckState());
     }
 
     //State Machine Callback Methods
-    private void OnEraserEquipped()
-    {
-        currentWeaponState = PlayerWeapon.ERASER;
-    }
-    private void OnWhiteEquipped()
-    {
-        currentWeaponState = PlayerWeapon.WHITE;
-    }
-
     protected override void OnInit()
     {
+        hp = PLAYER_HP_INIT;
+        EraserInit();
+        checkEraserCount = StartCoroutine(CheckEraserCount());
         currentState = BehaviourState.IDLE;
     }
     protected override void OnIdle()
     {
-        throw new NotImplementedException();
+        
     }
     protected override void OnMove()
     {
-        throw new NotImplementedException();
+        
     }
     protected override void OnAttack()
+    {
+        throw new NotImplementedException();
+    }
+    protected override void OnSkill()
     {
         throw new NotImplementedException();
     }
@@ -105,7 +110,33 @@ public class PlayerInf : Character {
     //Methods
     private void EraserInit()
     {
-
+        erasers = new List<GameObject>();
+        eraserPosAxises = new List<Transform>();
+        eraserPoses = new List<Transform>();
+        weaponAxis = transform.GetChild(0);
+        int i = 0;
+        do
+        {
+            eraserPosAxises.Add(weaponAxis.GetChild(i));
+            eraserPoses.Add(eraserPosAxises[i].GetChild(0));
+            erasers.Add(AddEraser(eraserPoses[i]));
+            if (i != 0)
+            {
+                eraserPosAxises[i].gameObject.SetActive(false);
+            }
+            i++;
+        } while (erasers.Count != PLAYER_ERASER_COUNT_MAX);
+        currentEraserCount = 1;
+        previousEraserCount = 1;
+        eraserSpaceCount = PLAYER_ERASER_COUNT_INIT;
+        ReformatEraserPos();
+    }
+    private void CheckAndGetEraser(Collision2D coll)
+    {
+        if(coll.collider.CompareTag("Item_Eraser") && currentEraserCount < eraserSpaceCount)
+        {
+            IncreaseCurrentEraserCount();
+        }
     }
     private void CheckAndGetPencilCase(Collision2D coll)
     {
@@ -116,9 +147,9 @@ public class PlayerInf : Character {
     }
     private void CheckHitByEnemy(Collision2D coll)
     {
-        if(coll.collider.CompareTag("Enemy") || coll.collider.CompareTag("Bullet"))
+        if (coll.collider.CompareTag("Enemy") || coll.collider.CompareTag("Bullet"))
         {
-            if(hp > 0)
+            if (hp > 0)
             {
                 currentState = BehaviourState.DAMAGED;
             }
@@ -128,19 +159,69 @@ public class PlayerInf : Character {
             }
         }
     }
+    private void IncreaseCurrentEraserCount() { currentEraserCount++; }
+    private void DecreaseCurrentEraserCount() { currentEraserCount--; }
     private void IncreaseEraserSpaceCount() { eraserSpaceCount++; }
     private void DecreaseEraserSpaceCount() { eraserSpaceCount--; }
     private void RotateWeaponAxis()
     {
-        if (currentState != BehaviourState.DIE)
+        if (currentState != BehaviourState.DIE || currentState != BehaviourState.INIT)
         {
-            Vector3 _rot = new Vector3(0, 0, PLAYER_WEAPON_ROTATION_SPEED * Time.fixedDeltaTime);
-            weaponAxis.localRotation = Quaternion.Euler(_rot);
+            weaponAxis.Rotate(new Vector3(0, 0, 1 * PLAYER_WEAPON_ROTATION_SPEED * Time.fixedDeltaTime));
         }
     }
-    
+    private void ReformatEraserPos()
+    {
+        for (int i = 0; i < currentEraserCount; i++)
+        {
+            eraserPosAxises[i].localRotation = Quaternion.Euler(new Vector3(0, 0, (360 / currentEraserCount) * i));
+        }
+    }
+    private void SetActiveEraser(int index, bool condition)
+    {
+        eraserPosAxises[index].gameObject.SetActive(condition);
+    }
+    private void SpawnWhite()
+    {
+        if(currentState != BehaviourState.INIT || currentState != BehaviourState.DIE)
+        {
+            if (!isWhiteEquipped)
+            {
+                whiteSpawnElapsedTime += Time.fixedDeltaTime;
+                if(whiteSpawnElapsedTime > PLAYER_WHITE_SPAWN_TIME)
+                {
+                    isWhiteEquipped = true;
+                    whiteSpawnElapsedTime = 0;
+                }
+            }
+        }
+    }
+    private GameObject AddEraser(Transform position)
+    {
+        return Instantiate<GameObject>(prefab_eraser, position);
+    }
 
     //Coroutines
+    private IEnumerator CheckEraserCount()
+    {
+        do
+        {
+            if(previousEraserCount != currentEraserCount)
+            {
+                if(previousEraserCount > currentEraserCount)
+                {
+                    SetActiveEraser(previousEraserCount - 1, false);
+                }
+                else
+                {
+                    SetActiveEraser(currentEraserCount - 1, true);
+                }
+                previousEraserCount = currentEraserCount;
+                ReformatEraserPos();
+            }
+            yield return new WaitForEndOfFrame();
+        } while (currentState != BehaviourState.DIE);
+    }
     protected override IEnumerator CheckState()
     {
         do
@@ -160,6 +241,9 @@ public class PlayerInf : Character {
                 case BehaviourState.ATTACK:
                     OnAttack();
                     break;
+                case BehaviourState.SKILL:
+                    OnSkill();
+                    break;
                 case BehaviourState.DAMAGED:
                     OnDamaged();
                     break;
@@ -177,27 +261,5 @@ public class PlayerInf : Character {
             }
             yield return null;
         } while (currentState != BehaviourState.FINALIZE);
-    }
-    private IEnumerator CheckPlayerWeapon()
-    {
-        do
-        {
-            if (currentWeaponState != previousWeaponState)
-            {
-                previousWeaponState = currentWeaponState;
-                switch (currentWeaponState)
-                {
-                    case PlayerWeapon.ERASER:
-                        OnEraserEquipped();
-                        break;
-                    case PlayerWeapon.WHITE:
-                        OnWhiteEquipped();
-                        break;
-                    default:
-                        break;
-                }
-            }
-            yield return new WaitForEndOfFrame();
-        }while (currentState != BehaviourState.DIE);
     }
 }

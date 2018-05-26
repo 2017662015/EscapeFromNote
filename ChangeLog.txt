@@ -1,0 +1,20 @@
+#ChangeLog of EscapeFromNote
+
+[2018-05-25 22:52] Build Log #1
+	1. Add PlayerMovementTest Scene.
+	2. Add Prefab named Player.
+	3. Add Character.cs as Abstract Class on \Scripts\Character\Abstract
+		- Add Enum named BehaviourState for State Machine of Characters
+			=> State List : NULL, INIT, IDLE, MOVE, ATTACK, SKILL, DAMAGED, DIE, GO_TO_NEXT_STAGE, FINALIZE
+		- Add Instance named checkState for IEnumerator CheckState
+		- Add Variable named hp(int), moveSpeed, currentState, previousState;
+		- Add Internal Getter method of currentState;
+		- Add Virtual method of Unity Callback Method, named OnCollisionEnter2D
+		- Add Virtual method named Init, whtch contains initialize procedure of class and state machine
+			
+	4. Add PlayerInf.cs as Component on \Scripts\Character\Player
+		- Add Logics for Eraser as Weapon
+			- Now Player can get Erasers as many as variable named 'eraserSpaceCount' with hitting a GameObject which has a tag named 'Item_Eraser'
+			- Now Player can get only one White item with waiting 30 seconds
+			- Now Player get One Eraser when game starts
+			- Now Position of erasers are formatted by count of eraser
