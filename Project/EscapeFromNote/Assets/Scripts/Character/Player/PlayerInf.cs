@@ -51,6 +51,9 @@ public class PlayerInf : Character
     protected override void OnCollisionEnter2D(Collision2D coll)
     {
         base.OnCollisionEnter2D(coll);
+        #if UNITY_EDITOR
+        Debug.Log(coll.collider.ToString());
+        #endif
         CheckAndGetPencilCase(coll);
         CheckHitByEnemy(coll);
     }
@@ -140,7 +143,7 @@ public class PlayerInf : Character
     }
     private void CheckAndGetPencilCase(Collision2D coll)
     {
-        if (coll.collider.CompareTag("PencilCase"))
+        if (coll.collider.CompareTag("Item_PencilCase"))
         {
             IncreaseEraserSpaceCount();
         }
