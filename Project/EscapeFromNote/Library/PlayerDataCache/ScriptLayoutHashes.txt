@@ -1,10 +1,11 @@
 Android
 PlayerPath?
-D:/Development/Projects/Unity/EscapeFromNote/Project/EscapeFromNote/0001.apk
+D:/Development/Projects/Unity/EscapeFromNote/Project/EscapeFromNote/ManagementTest.apk
 SceneListBegin?
-Assets/Scenes/Test/Player/PlayerMovementTest.unity
+Assets/Scenes/Test/Management/Management.unity
 SceneListEnd?
 8c8e424198240cd5381e7765a781213f Assembly-CSharp.dll:.UIButtonMessage
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.StageManagement
 c4a75f38edea8a816bd024aa376031be Assembly-CSharp.dll:.TweenOrthoSize
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 cf455f7a806648c6ed4c7d3e3f8a0e03 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -100,6 +101,7 @@ a4ba336b18824674218b3458f2e4d35c Assembly-CSharp.dll:.UIButtonColor
 f227ba7d745d69dce2a6474df892b93d Assembly-CSharp.dll:.EnvelopContent
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SetColorPickerColor
 daef908f8bf97fa741305285dde8e82f Assembly-CSharp.dll:.WindowAutoYaw
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GameManagement
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 cf455f7a806648c6ed4c7d3e3f8a0e03 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 13bdb7c23815c33a33b37b0ba8dd39be UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -200,6 +202,7 @@ e568ac27d5617cc8aba0434496cfdd33 Assembly-CSharp.dll:.UIPopupList
 da9f29ffd5c4f0ac8282bf265db79688 Assembly-CSharp.dll:.TypewriterEffect
 87850b8e331cb17df6147150299d2208 Assembly-CSharp.dll:.UIColorPicker
 5f090821814bc51a9f55429c0fa2da3e Assembly-CSharp.dll:.UIDragDropContainer
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlayerManagement
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Tutorial5
 c4a75f38edea8a816bd024aa376031be Assembly-CSharp.dll:.TweenFill
 dc7c79d279c7db671b5343c1c88ec717 Assembly-CSharp.dll:.AnimatedColor

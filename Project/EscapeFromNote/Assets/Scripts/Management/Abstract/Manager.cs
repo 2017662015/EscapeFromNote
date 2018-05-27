@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Manager<T> : MonoBehaviour where T : MonoBehaviour {
+    //Instances
     private static T instance;
     private static object _lock = new object();
 
+    //Variables
     private static bool applicationIsQuitting = false;
     private static int screenHeight, screenWidth;
     private static float maxRelScreenHeight, minRelScreenHeight, maxRelScreenWidth, minRelScreenWidth;
 
+    //Getter Methods
     public static T GetInstance()
     {
         if (applicationIsQuitting)
@@ -43,19 +46,14 @@ public abstract class Manager<T> : MonoBehaviour where T : MonoBehaviour {
         }
     }
 
-    protected static float GetScreenHeight() { return screenHeight; }
-    protected static float GetScreenWidth() { return screenWidth; }
-    protected static float GetMaxRelScreenHeight() { return maxRelScreenHeight; }
-    protected static float GetMaxRelScreenWidth() { return maxRelScreenWidth; }
-    protected static float GetMinRelScreenHeight() { return minRelScreenHeight; }
-    protected static float GetMinRelScreenWidth() { return minRelScreenWidth; }
-
+    //Unity Callback Methods
     private void OnDestroy() { applicationIsQuitting = true; }
     protected virtual void OnEnable()
     {
         SetResolution();
     }
-    
+
+    //Methods
     private void SetResolution()
     {
         Resolution[] _resoulutions = Screen.resolutions;
@@ -66,4 +64,11 @@ public abstract class Manager<T> : MonoBehaviour where T : MonoBehaviour {
         maxRelScreenWidth = screenWidth / 2;
         minRelScreenWidth = -minRelScreenWidth;
     }
+    protected static float GetScreenHeight() { return screenHeight; }
+    protected static float GetScreenWidth() { return screenWidth; }
+    protected static float GetMaxRelScreenHeight() { return maxRelScreenHeight; }
+    protected static float GetMaxRelScreenWidth() { return maxRelScreenWidth; }
+    protected static float GetMinRelScreenHeight() { return minRelScreenHeight; }
+    protected static float GetMinRelScreenWidth() { return minRelScreenWidth; }
+
 }

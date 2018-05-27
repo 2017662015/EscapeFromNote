@@ -25,8 +25,23 @@
 		- Add Screen Resolution Information for NGUI Coordinate System
 	2. Add GameManagement.cs at \Scripts\Management
 		- Implement State Machine for managing the lifecycle of game
+
 [2018-05-26 15:52] Build Log #3
 	1. Add StageManagement.cs at \Scripts\Managment
 		- Now StageManagement are controlled by GameManagement
 	2. Edit GameManagement.cs
 		- Fix GameManager Object isn't started with DontDestroyOnLoad
+		
+[2018-05-26 23:41] Build Log #4
+	1. Known Bug #1 - DontDestroyOnLoad Scene Doesn't be builded by Gradle Builder on Unity 2018.1.0f2
+	2. Edit GameManagement.cs
+		- Now GameMangement spawns Walls and Background on GameState.INIT_PLAY
+		- Add GameState.BACK_TO_TITLE at GameState Enum and Add OnBackToTitle Method as State Machine Callback Method
+		- Now GameManagement controls PlayerManagement with GameState
+	3. Add PlayerManagement.cs
+		- Add SpawnPlayer Method and DestroyMethod to spawn and destroy player in the world
+		- If player is in the world, PlayerMove Component is controlled by PlayerManagement
+	4. Edit Manager.cs
+		- Now Components which is child of Manager get current screen information with GetScreen[Type] Method
+	5. Add PlayerMove.cs
+		- New Controll System : Adoptive Controller

@@ -33,6 +33,8 @@ public class StageManagement : Manager<StageManagement>
     //Initialize Method of this class
     private void Init()
     {
+        currentState = GameManagement.GameState.INIT;
+        previousState = GameManagement.GameState.NULL;
         gameManagement = GameManagement.GetInstance();
         StartCoroutine(CheckState());
     }
@@ -81,11 +83,13 @@ public class StageManagement : Manager<StageManagement>
                         break;
                     case GameManagement.GameState.GAMEOVER:
                         break;
+                    case GameManagement.GameState.BACK_TO_TITLE:
+                        break;
                     default:
                         break;
                 }
             }
             yield return null;
-        } while (currentState != GameManagement.GameState.GAMEOVER);
+        } while (currentState != GameManagement.GameState.BACK_TO_TITLE);
     }
 }

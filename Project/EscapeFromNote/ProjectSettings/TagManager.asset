@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Item_PencilCase
   - Bullet
+  - Manager
   layers:
   - Default
   - TransparentFX

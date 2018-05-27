@@ -3,13 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManagement : Manager<GameManagement> {
+    //Prefab Instances
+    private GameObject prefab_walls;
+    private GameObject prefab_background;
 
     //Enums
-    public enum GameState { NULL = -2, INIT, TITLE, OPTION_TITLE, INIT_PLAY, PLAY, PAUSE, OPTION_PAUSE, RESUME, GAMEOVER, FINALIZE };
+    public enum GameState
+    {
+        NULL = -2,
+        INIT,
+        TITLE,
+        OPTION_TITLE,
+        INIT_PLAY,
+        PLAY,
+        PAUSE,
+        OPTION_PAUSE,
+        RESUME,
+        GAMEOVER,
+        BACK_TO_TITLE,
+        FINALIZE
+    };
 
     //Instances
+    private GameObject walls;
+    private GameObject background;
+    private Transform uiRoot;
     private Coroutine checkState;
     private StageManagement stageManagement;
+    private PlayerManagement playerManagement;
 
     //Variables
     private GameState currentState;
@@ -26,9 +47,13 @@ public class GameManagement : Manager<GameManagement> {
     //Initialize Method of this class
     private void Init()
     {
+        prefab_walls = Resources.Load("Prefabs/Walls") as GameObject;
+        prefab_background = Resources.Load("Prefabs/Background") as GameObject;
+        uiRoot = GameObject.Find("UI Root").transform;
         currentState = GameState.INIT;
         previousState = GameState.NULL;
         stageManagement = StageManagement.GetInstance();
+        playerManagement = PlayerManagement.GetInstance();
         StartCoroutine(CheckState());
     }
 
@@ -39,7 +64,7 @@ public class GameManagement : Manager<GameManagement> {
     }
     private void OnTitle()
     {
-        currentState = GameState.PLAY;
+        currentState = GameState.INIT_PLAY;
     }
     private void OnOptionTitle()
     {
@@ -47,7 +72,9 @@ public class GameManagement : Manager<GameManagement> {
     }
     private void OnInitPlay()
     {
-
+        SpawnWall();
+        SpawnBackground();
+        currentState = GameState.PLAY;
     }
     private void OnPlay()
     {
@@ -69,11 +96,57 @@ public class GameManagement : Manager<GameManagement> {
     {
 
     }
+    private void OnBackToTitle()
+    {
+        DestroyWall();
+        DestroyBackground();
+        currentState = GameState.TITLE;
+    }       
     private void OnFinalize()
     {
     }
     
     //Methods
+    private void SpawnWall()
+    {
+        if (GameObject.Find("Walls") == null)
+        {
+            walls = Instantiate<GameObject>(prefab_walls, uiRoot);
+            walls.name = "Walls";
+        }
+        else
+        {
+            Debug.LogError("GameObject 'Walls' is already spawned in the world!!!");
+        }
+    }
+    private void DestroyWall()
+    {
+        if (walls != null)
+        {
+            Destroy(walls);
+            walls = null;
+        }
+    }
+    private void SpawnBackground()
+    {
+        if (GameObject.Find("Background") == null)
+        {
+            background = Instantiate<GameObject>(prefab_background, uiRoot);
+            background.name = "Background";
+        }
+        else
+        {
+            Debug.LogError("GameObject 'Background' is already spawned in the world!!!");
+        }
+    }
+    private void DestroyBackground()
+    {
+        if(background != null)
+        {
+            Destroy(background);
+            background = null;
+        }
+    }
 
     //Coroutines
     private IEnumerator CheckState()
@@ -112,6 +185,9 @@ public class GameManagement : Manager<GameManagement> {
                     case GameState.GAMEOVER:
                         OnGameOver();
                         break;
+                    case GameState.BACK_TO_TITLE:
+                        OnBackToTitle();
+                        break;
                     case GameState.FINALIZE:
                         OnFinalize();
                         break;
@@ -119,6 +195,7 @@ public class GameManagement : Manager<GameManagement> {
                         break;
                 }
                 stageManagement.SetCurrentState(currentState);
+                playerManagement.SetCurrentState(currentState);
             }
             yield return null;
         } while (true);

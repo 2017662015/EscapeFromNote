@@ -5,10 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/EscapeFromNote.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Test/Player/PlayerMovementTest.unity
-    guid: d1a5922510ce781428e3c506c734dd3e
+    path: Assets/Scenes/Test/Management/Management.unity
+    guid: beb2b25cca1add1438e3bacb4428b359
   m_configObjects: {}

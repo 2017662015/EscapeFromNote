@@ -197,6 +197,7 @@
      <Compile Include="Assets\Scripts\Character\Player\PlayerMove.cs" />
      <Compile Include="Assets\Scripts\Management\Abstract\Manager.cs" />
      <Compile Include="Assets\Scripts\Management\GameManagement.cs" />
+     <Compile Include="Assets\Scripts\Management\PlayerManagement.cs" />
      <Compile Include="Assets\Scripts\Management\StageManagement.cs" />
      <Compile Include="Assets\Scripts\Test\Character\Player\MovementTest.cs" />
      <None Include="Assets\Externals\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />

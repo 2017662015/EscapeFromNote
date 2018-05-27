@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Test/Player/PlayerMovementTest.unity
+- path: Assets/Scenes/Test/Management/ManagementTest.unity
   isLoaded: 1
   isActive: 1
