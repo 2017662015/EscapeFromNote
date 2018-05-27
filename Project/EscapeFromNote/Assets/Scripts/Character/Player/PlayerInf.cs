@@ -229,38 +229,42 @@ public class PlayerInf : Character
     {
         do
         {
-            previousState = currentState;
-            switch (currentState)
+            if (previousState != currentState)
             {
-                case BehaviourState.INIT:
-                    OnInit();
-                    break;
-                case BehaviourState.IDLE:
-                    OnIdle();
-                    break;
-                case BehaviourState.MOVE:
-                    OnMove();
-                    break;
-                case BehaviourState.ATTACK:
-                    OnAttack();
-                    break;
-                case BehaviourState.SKILL:
-                    OnSkill();
-                    break;
-                case BehaviourState.DAMAGED:
-                    OnDamaged();
-                    break;
-                case BehaviourState.DIE:
-                    OnDie();
-                    break;
-                case BehaviourState.GO_TO_NEXT_STAGE:
-                    OnGoToNextStage();
-                    break;
-                case BehaviourState.FINALIZE:
-                    OnFinalize();
-                    break;
-                default:
-                    break;
+                previousState = currentState;
+                switch (currentState)
+                {
+                    case BehaviourState.INIT:
+                        OnInit();
+                        break;
+                    case BehaviourState.IDLE:
+                        OnIdle();
+                        break;
+                    case BehaviourState.MOVE:
+                        OnMove();
+                        break;
+                    case BehaviourState.ATTACK:
+                        OnAttack();
+                        break;
+                    case BehaviourState.SKILL:
+                        OnSkill();
+                        break;
+                    case BehaviourState.DAMAGED:
+                        OnDamaged();
+                        break;
+                    case BehaviourState.DIE:
+                        OnDie();
+                        break;
+                    case BehaviourState.GO_TO_NEXT_STAGE:
+                        OnGoToNextStage();
+                        break;
+                    case BehaviourState.FINALIZE:
+                        OnFinalize();
+                        break;
+                    default:
+                        break;
+                }
+                playerMove.SetCurrentState(currentState);
             }
             yield return null;
         } while (currentState != BehaviourState.FINALIZE);

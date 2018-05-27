@@ -7,12 +7,17 @@ public class PlayerManagement : Manager<PlayerManagement> {
     private GameObject prefab_player;
 
     //Instances
+    private GameManagement gameManagement;
     private GameObject player;
     private Transform uiRoot;
 
     //Variables
+    private float delayTime = 0.0f;
     private GameManagement.GameState currentState;
     private GameManagement.GameState previousState;
+
+    //Constants
+    private const float DELAY_INTERVAL_AFTER_SPAWN = 4.0f;
 
     //Setter Methods
     public void SetCurrentState(GameManagement.GameState state) { this.currentState = state; }
@@ -23,12 +28,16 @@ public class PlayerManagement : Manager<PlayerManagement> {
         base.OnEnable();
         Init();
     }
-
+    private void Update()
+    {
+        WaitingToStart();
+    }
     //Initialize Method of Class
     private void Init()
     {
         prefab_player = Resources.Load("Prefabs/Player") as GameObject;
         uiRoot = GameObject.Find("UI Root").transform;
+        gameManagement = GameManagement.GetInstance();
         currentState = GameManagement.GameState.INIT;
         previousState = GameManagement.GameState.NULL;
         StartCoroutine(CheckState());
@@ -65,6 +74,21 @@ public class PlayerManagement : Manager<PlayerManagement> {
         {
             Destroy(player);
             player = null;
+        }
+    }
+    private void WaitingToStart()
+    {
+        if (currentState == GameManagement.GameState.INIT_PLAY && player != null)
+        {
+            if (delayTime < DELAY_INTERVAL_AFTER_SPAWN)
+            {
+                delayTime += Time.deltaTime;
+            }
+            else
+            {
+                gameManagement.SetCurrentState(GameManagement.GameState.PLAY);
+                delayTime = 0.0f;
+            }
         }
     }
 

@@ -2,7 +2,7 @@ Android
 PlayerPath?
 D:/Development/Projects/Unity/EscapeFromNote/Project/EscapeFromNote/ManagementTest.apk
 SceneListBegin?
-Assets/Scenes/Test/Management/Management.unity
+Assets/Scenes/Test/Management/ManagementTest.unity
 SceneListEnd?
 8c8e424198240cd5381e7765a781213f Assembly-CSharp.dll:.UIButtonMessage
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.StageManagement
@@ -206,7 +206,7 @@ da9f29ffd5c4f0ac8282bf265db79688 Assembly-CSharp.dll:.TypewriterEffect
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Tutorial5
 c4a75f38edea8a816bd024aa376031be Assembly-CSharp.dll:.TweenFill
 dc7c79d279c7db671b5343c1c88ec717 Assembly-CSharp.dll:.AnimatedColor
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlayerMove
+a723fbedae099b288a2c2e28fddfb6d7 Assembly-CSharp.dll:.PlayerMove
 0022919459eb1dce1676290dccfcd8b1 Assembly-CSharp.dll:.SpringPanel
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 f02726adeff0a3ec5905565234b372da UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController

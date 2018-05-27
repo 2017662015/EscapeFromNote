@@ -36,6 +36,10 @@ public class GameManagement : Manager<GameManagement> {
     private GameState currentState;
     private GameState previousState;
 
+    //Setter Methods
+    public void SetCurrentState(GameState state) { currentState = state; }
+
+
     //Unity Callback Methods
     protected override void OnEnable()
     {
@@ -74,7 +78,6 @@ public class GameManagement : Manager<GameManagement> {
     {
         SpawnWall();
         SpawnBackground();
-        currentState = GameState.PLAY;
     }
     private void OnPlay()
     {
