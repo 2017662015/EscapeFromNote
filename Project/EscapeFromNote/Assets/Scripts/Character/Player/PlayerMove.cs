@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour
 
     //Variables
     private bool isFingerPressed;
-    [SerializeField][Range(30.0f, 100.0f)]private float moveSpeed = 30.0f;
+    [SerializeField][Range(300.0f, 1000.0f)]private float moveSpeed = 300.0f;
     private Vector3 initFingerPos;
     private Vector3 currentFingerPos;
     private Vector3 moveDir;
@@ -36,7 +36,7 @@ public class PlayerMove : MonoBehaviour
     {
         GetInput();
     }
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         MovePlayer();
     }
@@ -67,7 +67,7 @@ public class PlayerMove : MonoBehaviour
             if(Input.GetMouseButton(0))
             {
                 currentFingerPos = Input.mousePosition;
-                moveDir = currentFingerPos - initFingerPos;
+                moveDir = (currentFingerPos - initFingerPos).normalized;
             }
             if(Input.GetMouseButtonUp(0))
             {

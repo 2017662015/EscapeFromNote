@@ -45,3 +45,6 @@
 		- Now Components which is child of Manager get current screen information with GetScreen[Type] Method
 	5. Add PlayerMove.cs
 		- New Controll System : Adoptive Controller
+
+[2018-05-27 00:58] Build Log #5
+	1. Bug Fixed - Glitch on Adoptive Controller
