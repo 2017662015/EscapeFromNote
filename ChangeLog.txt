@@ -48,3 +48,15 @@
 
 [2018-05-27 00:58] Build Log #5
 	1. Bug Fixed - Glitch on Adoptive Controller
+	
+[2018-05-27 03:24] Build Log #6
+	1. Edit PlayerMove.cs
+		- Fix Player Controller Size as 100Øpx
+		- Now Player's speed is dynamic according to controller's position
+		- moveSpeed variable is serialized so director can change the value on the editor
+	2. Edit GameManagement.cs
+		- Now GameManager won't go GameState.PLAY stage itself, because of delay after spawning player.
+	3. Edit PlayerManagement.cs
+		- Now PlayerManagement set currentState of GameManagement as GameState.PLAY after waiting 4 seconds after player spawned.
+	4. Edit PlayerInf.cs
+		- Fixed CheckState Method.
