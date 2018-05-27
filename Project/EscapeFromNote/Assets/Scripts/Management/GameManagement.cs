@@ -4,29 +4,42 @@ using UnityEngine;
 
 public class GameManagement : Manager<GameManagement> {
 
+    //Enums
     public enum GameState { NULL = -2, INIT, TITLE, OPTION_TITLE, INIT_PLAY, PLAY, PAUSE, OPTION_PAUSE, RESUME, GAMEOVER, FINALIZE };
 
+    //Instances
+    private Coroutine checkState;
+    private StageManagement stageManagement;
+
+    //Variables
     private GameState currentState;
     private GameState previousState;
 
+    //Unity Callback Methods
     protected override void OnEnable()
     {
         base.OnEnable();
+        DontDestroyOnLoad(this.gameObject);
         Init();
     }
 
+    //Initialize Method of this class
     private void Init()
     {
-
+        currentState = GameState.INIT;
+        previousState = GameState.NULL;
+        stageManagement = StageManagement.GetInstance();
+        StartCoroutine(CheckState());
     }
 
+    //State Machine Callback Methods
     private void OnInit()
     {
-
+        currentState = GameState.TITLE;
     }
     private void OnTitle()
     {
-
+        currentState = GameState.PLAY;
     }
     private void OnOptionTitle()
     {
@@ -59,39 +72,55 @@ public class GameManagement : Manager<GameManagement> {
     private void OnFinalize()
     {
     }
+    
+    //Methods
 
-
+    //Coroutines
     private IEnumerator CheckState()
     {
         do
         {
-            switch (currentState)
+            if (previousState != currentState)
             {
-                case GameState.NULL:
-                    break;
-                case GameState.INIT:
-                    break;
-                case GameState.TITLE:
-                    break;
-                case GameState.OPTION_TITLE:
-                    break;
-                case GameState.INIT_PLAY:
-                    break;
-                case GameState.PLAY:
-                    break;
-                case GameState.PAUSE:
-                    break;
-                case GameState.OPTION_PAUSE:
-                    break;
-                case GameState.RESUME:
-                    break;
-                case GameState.GAMEOVER:
-                    break;
-                case GameState.FINALIZE:
-                    break;
-                default:
-                    break;
+                previousState = currentState;
+                switch (currentState)
+                {
+                    case GameState.INIT:
+                        OnInit();
+                        break;
+                    case GameState.TITLE:
+                        OnTitle();
+                        break;
+                    case GameState.OPTION_TITLE:
+                        OnOptionTitle();
+                        break;
+                    case GameState.INIT_PLAY:
+                        OnInitPlay();
+                        break;
+                    case GameState.PLAY:
+                        OnPlay();
+                        break;
+                    case GameState.PAUSE:
+                        OnPause();
+                        break;
+                    case GameState.OPTION_PAUSE:
+                        OnOptionPause();
+                        break;
+                    case GameState.RESUME:
+                        OnResume();
+                        break;
+                    case GameState.GAMEOVER:
+                        OnGameOver();
+                        break;
+                    case GameState.FINALIZE:
+                        OnFinalize();
+                        break;
+                    default:
+                        break;
+                }
+                stageManagement.SetCurrentState(currentState);
             }
+            yield return null;
         } while (true);
     }
 }

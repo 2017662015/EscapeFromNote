@@ -25,3 +25,8 @@
 		- Add Screen Resolution Information for NGUI Coordinate System
 	2. Add GameManagement.cs at \Scripts\Management
 		- Implement State Machine for managing the lifecycle of game
+[2018-05-26 15:52] Build Log #3
+	1. Add StageManagement.cs at \Scripts\Managment
+		- Now StageManagement are controlled by GameManagement
+	2. Edit GameManagement.cs
+		- Fix GameManager Object isn't started with DontDestroyOnLoad
