@@ -60,3 +60,24 @@
 		- Now PlayerManagement set currentState of GameManagement as GameState.PLAY after waiting 4 seconds after player spawned.
 	4. Edit PlayerInf.cs
 		- Fixed CheckState Method.
+[2018-05-29 06:34] Build Log #7
+	1. Edit Manager.cs
+		- Bug Fixed : Fixed IndexOutOfRangeException at Manager.cs:57 on Android Experimal Build
+		- Delected All allocated method/variables with UnityEngine.Screen.Resoulution(Doesn't Support on Android)
+	2. Edit PlayerMove.cs
+		- Add UI for Adoptive Controller(Texture Not Set)
+		- Convert Moving Logic(Transform.position to Rigidbody2D.position for performance)
+		- Increase Area Radius of Adoptive Controller to 150.0Øpx
+		- Convert Finger Coordinate Vector3 Variables to Vector2
+		- Synchronized Timeline of GetInput and MovePlayer.
+	3. Edit PlayerInf.cs
+		- Re-Schedule State of Player
+		- Now GameManagement.currentState goes GameState.GameOver when Player Die and Finalize itself's Lifecycle.
+	4. Add EnemyBehaviour.cs
+		- Inherited Character.cs
+		- Support Multi Bullet Fire Position and Dynamic Bullet Object Pool
+		- Add Player Auto-Targeting System
+	5. Add PencilMove.cs, BallPenMove.cs, FountainPenMove.cs For Enemy
+		- Inherited EnemyBehaviour.cs
+	6. Add EnemyTest.Scene
+		- Construct the scene for testing enemy(Postive & Event Test)

@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Test/Management/ManagementTest.unity
-    guid: 47a716d797933c547a27aa07f909d2fc
+    path: Assets/Scenes/Test/Enemy/EnemyTest.unity
+    guid: 591b8c5b3d6dc6842a2ba0afc538bef3
   m_configObjects: {}

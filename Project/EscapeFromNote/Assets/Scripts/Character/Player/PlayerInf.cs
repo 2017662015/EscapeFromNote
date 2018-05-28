@@ -21,7 +21,7 @@ public class PlayerInf : Character
     //Variables
     private bool isWhiteEquipped;
     private bool isPencilCaseEquipped;
-    [SerializeField][Range(1, 4)]private int currentEraserCount = 0;
+    [SerializeField][Range(0, 4)]private int currentEraserCount = 0;
     private int previousEraserCount = 0;
     [SerializeField][Range(3, 4)]private int eraserSpaceCount = 0;
     [SerializeField]private float whiteSpawnElapsedTime = 0.0f;
@@ -39,13 +39,10 @@ public class PlayerInf : Character
     {
         Init();
     }
-    private void LateUpdate()
-    {
-        RotateWeaponAxis();
-    }
     private void FixedUpdate()
     {
         SpawnWhite();
+        RotateWeaponAxis();
     }
 
     protected override void OnCollisionEnter2D(Collision2D coll)
@@ -95,6 +92,7 @@ public class PlayerInf : Character
     protected override void OnDamaged()
     {
         hp--;
+        currentState = BehaviourState.IDLE;
     }
     protected override void OnDie()
     {
@@ -107,6 +105,11 @@ public class PlayerInf : Character
     }
     protected override void OnFinalize()
     {
+        StopCoroutine(checkEraserCount);
+        StopCoroutine(checkState);
+        checkEraserCount = null;
+        checkState = null;
+        GameManagement.GetInstance().SetCurrentState(GameManagement.GameState.GAMEOVER);
         gameObject.SetActive(false);
     }
 
@@ -152,6 +155,7 @@ public class PlayerInf : Character
     {
         if (coll.collider.CompareTag("Enemy") || coll.collider.CompareTag("Bullet"))
         {
+            Debug.Log(hp);
             if (hp > 0)
             {
                 currentState = BehaviourState.DAMAGED;
@@ -267,6 +271,6 @@ public class PlayerInf : Character
                 playerMove.SetCurrentState(currentState);
             }
             yield return null;
-        } while (currentState != BehaviourState.FINALIZE);
+        } while (true);
     }
 }

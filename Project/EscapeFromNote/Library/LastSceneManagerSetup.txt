@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Test/Management/ManagementTest.unity
+- path: Assets/Scenes/Test/Enemy/EnemyTest.unity
   isLoaded: 1
   isActive: 1

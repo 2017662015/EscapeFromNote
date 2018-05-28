@@ -9,9 +9,6 @@ public abstract class Manager<T> : MonoBehaviour where T : MonoBehaviour {
 
     //Variables
     private static bool applicationIsQuitting = false;
-    private static int screenHeight, screenWidth;
-    private static float maxRelScreenHeight, minRelScreenHeight, maxRelScreenWidth, minRelScreenWidth;
-
     //Getter Methods
     public static T GetInstance()
     {
@@ -48,27 +45,6 @@ public abstract class Manager<T> : MonoBehaviour where T : MonoBehaviour {
 
     //Unity Callback Methods
     private void OnDestroy() { applicationIsQuitting = true; }
-    protected virtual void OnEnable()
-    {
-        SetResolution();
-    }
-
-    //Methods
-    private void SetResolution()
-    {
-        Resolution[] _resoulutions = Screen.resolutions;
-        screenHeight = _resoulutions[0].height;
-        screenWidth = _resoulutions[0].width;
-        maxRelScreenHeight = screenHeight / 2;
-        minRelScreenHeight = -maxRelScreenHeight;
-        maxRelScreenWidth = screenWidth / 2;
-        minRelScreenWidth = -minRelScreenWidth;
-    }
-    protected static float GetScreenHeight() { return screenHeight; }
-    protected static float GetScreenWidth() { return screenWidth; }
-    protected static float GetMaxRelScreenHeight() { return maxRelScreenHeight; }
-    protected static float GetMaxRelScreenWidth() { return maxRelScreenWidth; }
-    protected static float GetMinRelScreenHeight() { return minRelScreenHeight; }
-    protected static float GetMinRelScreenWidth() { return minRelScreenWidth; }
+    protected virtual void OnEnable() {   }
 
 }

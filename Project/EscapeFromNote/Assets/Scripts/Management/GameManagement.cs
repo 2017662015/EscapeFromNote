@@ -39,7 +39,6 @@ public class GameManagement : Manager<GameManagement> {
     //Setter Methods
     public void SetCurrentState(GameState state) { currentState = state; }
 
-
     //Unity Callback Methods
     protected override void OnEnable()
     {
