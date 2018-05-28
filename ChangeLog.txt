@@ -45,7 +45,7 @@
 		- Now Components which is child of Manager get current screen information with GetScreen[Type] Method
 	5. Add PlayerMove.cs
 		- New Controll System : Adoptive Controller
-
+		
 [2018-05-27 00:58] Build Log #5
 	1. Bug Fixed - Glitch on Adoptive Controller
 	
@@ -60,6 +60,7 @@
 		- Now PlayerManagement set currentState of GameManagement as GameState.PLAY after waiting 4 seconds after player spawned.
 	4. Edit PlayerInf.cs
 		- Fixed CheckState Method.
+		
 [2018-05-29 06:34] Build Log #7
 	1. Edit Manager.cs
 		- Bug Fixed : Fixed IndexOutOfRangeException at Manager.cs:57 on Android Experimal Build
