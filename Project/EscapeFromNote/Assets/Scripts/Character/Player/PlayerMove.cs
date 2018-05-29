@@ -133,7 +133,7 @@ public class PlayerMove : MonoBehaviour
     private void MovePlayer()
     {
         if(currentGameState == GameManagement.GameState.PLAY && 
-            currentState != Character.BehaviourState.INIT && currentState != Character.BehaviourState.DIE)
+            currentState != Character.BehaviourState.INIT && currentState != Character.BehaviourState.DIE && currentState != Character.BehaviourState.FINALIZE)
         {
             if(isFingerPressed)
             {

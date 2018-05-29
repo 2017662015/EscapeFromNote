@@ -9,6 +9,7 @@ TagManager:
   - Item_PencilCase
   - Bullet
   - Manager
+  - Wall
   layers:
   - Default
   - TransparentFX

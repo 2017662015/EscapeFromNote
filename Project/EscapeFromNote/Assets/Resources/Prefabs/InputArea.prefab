@@ -98,7 +98,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 0.28627452}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 150
   mHeight: 150
@@ -121,8 +121,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
-  mSpriteName: Button A
+  mAtlas: {fileID: 114259796367177280, guid: e9f62fd5fd75ecc489273f5d799e9823, type: 2}
+  mSpriteName: InputArea_Play_Sprite
   mFillCenter: 1
 --- !u!114 &114873755822619248
 MonoBehaviour:
@@ -154,8 +154,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 0.95686275}
   mPivot: 4
-  mWidth: 50
-  mHeight: 50
+  mWidth: 100
+  mHeight: 100
   mDepth: 9
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
@@ -175,6 +175,6 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
-  mSpriteName: Button B
+  mAtlas: {fileID: 114259796367177280, guid: e9f62fd5fd75ecc489273f5d799e9823, type: 2}
+  mSpriteName: InputBtn_Play_Sprite
   mFillCenter: 1

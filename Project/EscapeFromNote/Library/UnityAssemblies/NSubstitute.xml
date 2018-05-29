@@ -1,0 +1,11 @@
+﻿<?xml version="1.0"?>
+<doc>
+	<assembly>
+		<name>NSubstitute</name>
+	</assembly>
+	<members>
+		<member name="T:Castle.Core.Logging.ILogger">
+			<summary>Interface for custom logger implementation.</summary>
+		</member>
+	</members>
+</doc>
