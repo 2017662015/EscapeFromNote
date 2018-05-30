@@ -10,7 +10,10 @@ public class EnemyBehaviour : Character
 
     //Instances
     protected Transform target;
+    protected Transform uiRoot;
     protected Rigidbody2D rb2D;
+    protected UISprite uiSprite;
+    protected BoxCollider2D boxColl;
     protected List<GameObject> bullets;
     protected List<GameObject> disabledBullets;
     protected List<Transform> bulletSpawnPoses;
@@ -20,8 +23,13 @@ public class EnemyBehaviour : Character
     protected int currentStage = 0;
     protected int bulletSpawnPosesCount;
     protected int bulletCountOfStage;
+    protected int aliveBulletCount = 0;
+    private float waitTime = 0.0f;
+    private float spawnDelay = 0.0f;
     protected float bulletShotDelay;
 
+    //Constants
+    protected float ENEMY_SPAWN_DELAY_LENGTH = 0.5f;
 
     //Unity Callback Methods
     protected override void OnCollisionEnter2D(Collision2D coll)
@@ -37,22 +45,54 @@ public class EnemyBehaviour : Character
     {
         LookPlayer();
     }
+    protected virtual void Update()
+    {
+        WaitForShot();
+        //TODO: Need to be finalize on EnemyManagement
+        if(stageManagement.GetCurrentState() == GameManagement.GameState.GAMEOVER)
+        {
+            OnFinalize();
+        }
+    }
+    protected virtual void OnDisable()
+    {
+        Finalize();
+    }
 
     //Initialize Methods of this class
     private void OnEnableProcedure()
     {
         Init();
         StartCoroutine(CheckState());
-        StartCoroutine(CheckStage());  
+        StartCoroutine(CheckStage());
     }
     protected override void Init()
     {
         base.Init();
         rb2D = gameObject.GetComponent<Rigidbody2D>();
+        uiRoot = GameObject.Find("UI Root").transform;
         target = GameObject.FindWithTag("Player").transform;
         stageManagement = StageManagement.GetInstance();
-        bullets = new List<GameObject>();
-        disabledBullets = new List<GameObject>();
+        uiSprite = gameObject.GetComponent<UISprite>();
+        boxColl = gameObject.GetComponent<BoxCollider2D>();
+        
+    }
+
+    //Finalize Method of this class
+    protected override void Finalize()
+    {
+        base.Finalize();
+        boxColl.enabled = true;
+        uiSprite.enabled = true;
+        currentStage = 0;
+        aliveBulletCount = 0;
+        bulletSpawnPosesCount = 0;
+        bulletCountOfStage = 0;
+        waitTime = 0;
+        spawnDelay = 0;
+        bulletShotDelay = 0;
+        bulletSpawnPoses = null;
+        DestroyAllBullets();
     }
 
     //State Machine Callback Methods;
@@ -63,12 +103,15 @@ public class EnemyBehaviour : Character
     }
     protected override void OnIdle()
     {
+        WaitForShot();
     }
     protected override void OnMove()
     {
     }
     protected override void OnAttack()
     {
+        Shot();
+        currentState = BehaviourState.IDLE;
     }
     protected override void OnSkill()
     {
@@ -78,7 +121,9 @@ public class EnemyBehaviour : Character
     }
     protected override void OnDie()
     {
-        currentState = BehaviourState.FINALIZE;
+        uiSprite.enabled = false;
+        boxColl.enabled = false;
+        StartCoroutine(WaitForFinalize());
     }
     protected override void OnFinalize()
     {
@@ -86,10 +131,11 @@ public class EnemyBehaviour : Character
     }
     protected override void OnGoToNextStage()
     {
-        Debug.Log("OnGoTONextStage Called");
-        bulletCountOfStage = GetBulletCountOfStage();
-        MakeBulletSpaces(bulletCountOfStage);
         currentState = BehaviourState.IDLE;
+        if (bullets == null || bullets.Count == 0)
+        {
+            MakeBulletSpaces(bulletCountOfStage);
+        }
     }
 
     //Methods
@@ -101,9 +147,11 @@ public class EnemyBehaviour : Character
     }
     private void MakeBulletSpaces(int count)
     {
+        bullets = new List<GameObject>();
+        disabledBullets = new List<GameObject>();
         for (int i = 0; i < count; i++)
         {
-            GameObject _bullet = Instantiate(prefab_bullet);
+            GameObject _bullet = Instantiate(prefab_bullet, uiRoot);
             _bullet.name = _bullet.name.Replace("(Clone)", "");
             _bullet.SetActive(false);
             bullets.Add(_bullet);
@@ -117,6 +165,24 @@ public class EnemyBehaviour : Character
             currentState = BehaviourState.DIE;
         }
     }
+    private void WaitForShot()
+    {
+        if (stageManagement.GetCurrentState() == GameManagement.GameState.PLAY)
+        {
+            if (currentState == BehaviourState.IDLE && currentStage > 0)
+            {
+                if (waitTime < bulletShotDelay)
+                {
+                    waitTime += Time.deltaTime;
+                }
+                else
+                {
+                    waitTime = 0;
+                    currentState = BehaviourState.ATTACK;
+                }
+            }
+        }
+    }
     private int GetBulletSpawnPoses()
     {
         bulletSpawnPoses = new List<Transform>();
@@ -125,18 +191,74 @@ public class EnemyBehaviour : Character
         {
             for (int i = 0; i < _count; i++)
             {
-                bulletSpawnPoses.Add(transform.GetChild(0).GetChild(i)); 
+                bulletSpawnPoses.Add(transform.GetChild(0).GetChild(i));
             }
         }
         return _count;
     }
+    protected void DestroyAllBullets()
+    {
+        if (bullets != null)
+        {
+            do
+            {
+                Destroy(bullets[0]);
+                bullets.RemoveAt(0);
+            } while (bullets.Count != 0);
+            bullets = null;
+            disabledBullets = null;
+        }
+    }
     protected int GetBulletCountOfStage()
     {
-        Debug.Log((int)(StageManagement.STAGE_INTERVAL_TIME / bulletShotDelay) * bulletSpawnPosesCount);
         return (int)(StageManagement.STAGE_INTERVAL_TIME / bulletShotDelay) * bulletSpawnPosesCount;
     }
-    
+    protected virtual void Shot()
+    {
+        if(disabledBullets.Count != 0)
+        {
+            for(int i = 0; i < bulletSpawnPoses.Count; i++)
+            {
+                disabledBullets[0].SetActive(true);
+                disabledBullets[0].transform.position = bulletSpawnPoses[i].position;
+                disabledBullets[0].GetComponent<BulletBehaviour>().SetEnemyBehaviour(this);
+                disabledBullets[0].GetComponent<BulletBehaviour>().SetMoveDir(bulletSpawnPoses[i].up);
+                disabledBullets.RemoveAt(0);
+                aliveBulletCount++;
+            }
+        }
+        else
+        {
+            Reload();
+        }
+    }
+    protected virtual void Reload()
+    {
+        int i = 0;
+        do
+        {
+            if(!bullets[i].activeSelf)
+            {
+                disabledBullets.Add(bullets[i]);
+            }
+            i++;
+        } while (disabledBullets.Count != bullets.Count - aliveBulletCount);
+    }
+    public void DecreaseAliveBulletCount() { aliveBulletCount--; }
+
     //Coroutines
+    private IEnumerator CheckStage()
+    {
+        do
+        {
+            if (currentStage != stageManagement.GetStage())
+            {
+                currentStage = stageManagement.GetStage();
+                currentState = BehaviourState.GO_TO_NEXT_STAGE;
+            }
+            yield return null;
+        } while (currentState != BehaviourState.DIE);
+    }
     protected override IEnumerator CheckState()
     {
         do
@@ -180,16 +302,13 @@ public class EnemyBehaviour : Character
             yield return null;
         } while (true);
     }
-    private IEnumerator CheckStage()
+    private IEnumerator WaitForFinalize()
     {
         do
         {
-            if (currentStage != stageManagement.GetStage())
-            {
-                currentStage = stageManagement.GetStage();
-                currentState = BehaviourState.GO_TO_NEXT_STAGE;
-            }
             yield return null;
-        }while(currentState != BehaviourState.DIE);
+        } while (aliveBulletCount != 0);
+        currentState = BehaviourState.FINALIZE;
     }
 }
+ 

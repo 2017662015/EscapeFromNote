@@ -82,3 +82,16 @@
 		- Inherited EnemyBehaviour.cs
 	6. Add EnemyTest.Scene
 		- Construct the scene for testing enemy(Postive & Event Test)
+
+[2018-05-30 08:26] Build Log #8
+	1. Add Item_PencilCase, Item_Eraser Prefabs
+		- Add ItemPencilCaseConfig.cs for Item_PencilCase
+		- Add ItemEraserConfig.cs for Item_Eraser
+		- Now Player can get these items from OnTriggerEnter()
+	2. Add BulletBehaviour.cs
+		- Add Reflection Logic for gameplay.
+		- Spawned bullet will be disappear after BULLET_LIFE_TIME constant(Default value : 10.0f)
+		- CircleCollider2D of bullet will be triggered when collide with Player and Enemy
+	3. Edit EnemyBehaviour.cs
+		- Now Enemy Shoots the bullets which are already counted.
+	4. A lot of minor issue fixed.(almost 50+)

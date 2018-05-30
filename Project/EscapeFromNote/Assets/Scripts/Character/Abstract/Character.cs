@@ -20,14 +20,18 @@ public abstract class Character : MonoBehaviour {
 
     //Unity Callback Methods
     protected virtual void OnCollisionEnter2D(Collision2D coll) { }
-
+    protected virtual void OnTriggerEnter2D(Collider2D coll) { }
     //Initialize Method of Class
     protected virtual void Init()
     {
         currentState = BehaviourState.INIT;
         previousState = BehaviourState.NULL;
     }
+    //Finalize Method of Class
+    protected virtual void Finalize()
+    {
 
+    }
     //State Machine Callback Methods
     protected abstract void OnInit();
     protected abstract void OnIdle();

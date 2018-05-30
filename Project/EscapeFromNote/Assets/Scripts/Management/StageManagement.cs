@@ -20,6 +20,7 @@ public class StageManagement : Manager<StageManagement>
     public int GetStage() { return stage; }
 
     //Setter Methods
+    public GameManagement.GameState GetCurrentState() { return currentState; }
     public void SetCurrentState(GameManagement.GameState state) { this.currentState = state; }
 
     //Unity Callback Methods

@@ -159,6 +159,7 @@ GameObject:
   - component: {fileID: 114977852138636352}
   - component: {fileID: 114466020036574964}
   - component: {fileID: 114296099519127924}
+  - component: {fileID: 114312144384733098}
   m_Layer: 5
   m_Name: Player
   m_TagString: Player
@@ -339,7 +340,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.2, y: 0}
   serializedVersion: 2
-  m_Radius: 40
+  m_Radius: 30
 --- !u!114 &114296099519127924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -370,14 +371,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 41
-  mHeight: 55
+  mWidth: 67
+  mHeight: 90
   mDepth: 5
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
-  keepAspectRatio: 2
-  aspectRatio: 0.7389163
+  keepAspectRatio: 0
+  aspectRatio: 0.74444443
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -394,6 +395,121 @@ MonoBehaviour:
   mAtlas: {fileID: 114954320972984800, guid: 9c7bbc97d730bc24989ed55121db1a40, type: 2}
   mSpriteName: Hand_Idle
   mFillCenter: 1
+--- !u!114 &114312144384733098
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1997847941588888}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa4a4a103e4fed43a7e9e9df4a6915c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  method: 0
+  style: 0
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.006187439
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.23910035
+      value: 1.0065651
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.48837784
+      value: -0.018749997
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7350366
+      value: 1.0314422
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.9990877
+      value: 0.00087680394
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.2744839
+      value: 1.0453583
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.4948151
+      value: 0.009783046
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.7457486
+      value: 0.9950862
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.9947217
+      value: 0.0007869961
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 0
+    m_RotationOrder: 4
+  ignoreTimeScale: 0
+  delay: 0
+  duration: 2
+  steeperCurves: 0
+  tweenGroup: 0
+  useFixedUpdate: 0
+  onFinished:
+  - mTarget: {fileID: 114977852138636352}
+    mMethodName: EndDamaged
+    mParameters: []
+    oneShot: 0
+  eventReceiver: {fileID: 0}
+  callWhenFinished: 
+  from: {r: 1, g: 1, b: 1, a: 1}
+  to: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
 --- !u!114 &114466020036574964
 MonoBehaviour:
   m_ObjectHideFlags: 1

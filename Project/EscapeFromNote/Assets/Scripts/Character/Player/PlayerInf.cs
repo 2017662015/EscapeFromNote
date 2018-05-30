@@ -11,6 +11,7 @@ public class PlayerInf : Character
 
     //Instances
     private Transform weaponAxis;
+    private TweenColor tweenColor;
     private Coroutine checkEraserCount;
     private PlayerAnim playerAnim;
     private PlayerMove playerMove;
@@ -26,6 +27,7 @@ public class PlayerInf : Character
     [SerializeField][Range(3, 4)]private int eraserSpaceCount = 0;
     [SerializeField]private float whiteSpawnElapsedTime = 0.0f;
     private float eraserSpawnElapsedTime = 0.0f;
+
     //Constants
     private const int PLAYER_ERASER_COUNT_INIT = 3;
     private const int PLAYER_ERASER_COUNT_MAX = 4;
@@ -33,6 +35,9 @@ public class PlayerInf : Character
     private const float PLAYER_ERASER_SPAWN_TIME = 10.0f;
     private const float PLAYER_WEAPON_ROTATION_SPEED = 100.0f;
     private const float PLAYER_WHITE_SPAWN_TIME = 30.0f;
+
+    //Getters
+    private bool GetIsWhiteEquipped() { return this.isWhiteEquipped; }
 
     //Unity Callback Methods
     private void OnEnable()
@@ -44,15 +49,17 @@ public class PlayerInf : Character
         SpawnWhite();
         RotateWeaponAxis();
     }
-
     protected override void OnCollisionEnter2D(Collision2D coll)
     {
         base.OnCollisionEnter2D(coll);
-        #if UNITY_EDITOR
-        Debug.Log(coll.collider.ToString());
-        #endif
-        CheckAndGetPencilCase(coll);
         CheckHitByEnemy(coll);
+        CheckHitByBullet(coll);
+    }
+    protected override void OnTriggerEnter2D(Collider2D coll)
+    {
+        base.OnTriggerEnter2D(coll);
+        CheckAndGetPencilCase(coll);
+        CheckAndGetEraser(coll);
     }
 
     //Initialze Method of Class
@@ -62,6 +69,7 @@ public class PlayerInf : Character
         prefab_eraser = Resources.Load("Prefabs/Eraser") as GameObject;
         playerAnim = gameObject.GetComponent<PlayerAnim>();
         playerMove = gameObject.GetComponent<PlayerMove>();
+        tweenColor = gameObject.GetComponent<TweenColor>();
         checkState = StartCoroutine(CheckState());
     }
 
@@ -92,7 +100,8 @@ public class PlayerInf : Character
     protected override void OnDamaged()
     {
         hp--;
-        currentState = BehaviourState.IDLE;
+        tweenColor.enabled = true;
+        tweenColor.duration = 2.0f;
     }
     protected override void OnDie()
     {
@@ -137,23 +146,38 @@ public class PlayerInf : Character
         eraserSpaceCount = PLAYER_ERASER_COUNT_INIT;
         ReformatEraserPos();
     }
-    private void CheckAndGetEraser(Collision2D coll)
+    private void CheckAndGetEraser(Collider2D coll)
     {
-        if(coll.collider.CompareTag("Item_Eraser") && currentEraserCount < eraserSpaceCount)
+        if(coll.CompareTag("Item_Eraser") && currentEraserCount < eraserSpaceCount)
         {
             IncreaseCurrentEraserCount();
         }
     }
-    private void CheckAndGetPencilCase(Collision2D coll)
+    private void CheckAndGetPencilCase(Collider2D coll)
     {
-        if (coll.collider.CompareTag("Item_PencilCase"))
+        if (coll.CompareTag("Item_PencilCase"))
         {
             IncreaseEraserSpaceCount();
         }
     }
     private void CheckHitByEnemy(Collision2D coll)
     {
-        if (coll.collider.CompareTag("Enemy") || coll.collider.CompareTag("Bullet"))
+        if (coll.collider.CompareTag("Enemy"))
+        {
+            Debug.Log(hp);
+            if (hp > 0)
+            {
+                currentState = BehaviourState.DAMAGED;
+            }
+            else
+            {
+                currentState = BehaviourState.DIE;
+            }
+        }
+    }
+    private void CheckHitByBullet(Collision2D coll)
+    {
+        if (coll.collider.CompareTag("Bullet"))
         {
             Debug.Log(hp);
             if (hp > 0)
@@ -206,6 +230,12 @@ public class PlayerInf : Character
     private GameObject AddEraser(Transform position)
     {
         return Instantiate<GameObject>(prefab_eraser, position);
+    }
+    public void EndDamaged()
+    {
+        tweenColor.ResetToBeginning();
+        tweenColor.enabled = false;
+        currentState = BehaviourState.IDLE;
     }
 
     //Coroutines

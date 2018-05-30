@@ -122,7 +122,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1567414153845084}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -365, y: 0, z: 0}
+  m_LocalPosition: {x: -385, y: 0, z: 0}
   m_LocalScale: {x: 0.9984, y: 0.9984, z: 0.9984}
   m_Children: []
   m_Father: {fileID: 4104947978605998}
@@ -135,7 +135,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1932234084565078}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 650, z: 0}
+  m_LocalPosition: {x: 0, y: 665, z: 0}
   m_LocalScale: {x: 0.9984, y: 0.9984, z: 0.9984}
   m_Children: []
   m_Father: {fileID: 4104947978605998}
@@ -148,7 +148,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1608665988222354}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -650, z: 0}
+  m_LocalPosition: {x: 0, y: -665, z: 0}
   m_LocalScale: {x: 0.9984, y: 0.9984, z: 0.9984}
   m_Children: []
   m_Father: {fileID: 4104947978605998}
@@ -161,7 +161,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1630998955269610}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 365, y: 0, z: 0}
+  m_LocalPosition: {x: 385, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4104947978605998}
@@ -270,7 +270,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 1280}
+  m_Size: {x: 50, y: 1380}
   m_EdgeRadius: 0
 --- !u!61 &61697675809223378
 BoxCollider2D:
@@ -295,7 +295,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 1280}
+  m_Size: {x: 50, y: 1380}
   m_EdgeRadius: 0
 --- !u!61 &61802382292722836
 BoxCollider2D:
@@ -320,7 +320,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 720, y: 10}
+  m_Size: {x: 720, y: 50}
   m_EdgeRadius: 0
 --- !u!61 &61946160407931914
 BoxCollider2D:
@@ -345,7 +345,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 720, y: 10}
+  m_Size: {x: 720, y: 50}
   m_EdgeRadius: 0
 --- !u!114 &114336701154590138
 MonoBehaviour:
@@ -377,14 +377,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 10
-  mHeight: 1280
+  mWidth: 50
+  mHeight: 1380
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 0.0078125
+  aspectRatio: 0.036231883
 --- !u!114 &114437381235996708
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -415,14 +415,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 10
-  mHeight: 1280
+  mWidth: 50
+  mHeight: 1380
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 0.0078125
+  aspectRatio: 0.036231883
 --- !u!114 &114450078643134992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -454,13 +454,13 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 720
-  mHeight: 10
+  mHeight: 50
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 72
+  aspectRatio: 14.4
 --- !u!114 &114554169493468532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -492,10 +492,10 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 720
-  mHeight: 10
+  mHeight: 50
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 72
+  aspectRatio: 14.4

@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - Manager
   - Wall
+  - Item_Eraser
   layers:
   - Default
   - TransparentFX
