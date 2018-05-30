@@ -14,7 +14,10 @@ public class StageManagement : Manager<StageManagement>
     private GameManagement.GameState previousState;
 
     //Constatnts
-    private const float STAGE_INTERVAL_TIME = 30.0f;
+    public const float STAGE_INTERVAL_TIME = 30.0f;
+
+    //Getter Methods
+    public int GetStage() { return stage; }
 
     //Setter Methods
     public void SetCurrentState(GameManagement.GameState state) { this.currentState = state; }

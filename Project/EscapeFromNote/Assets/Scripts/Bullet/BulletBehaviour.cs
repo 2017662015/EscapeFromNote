@@ -36,6 +36,7 @@ public class BulletBehaviour : MonoBehaviour {
         {
             rb2D.AddForce((transform.up + (transform.right * 0.7f)) * Time.fixedDeltaTime * 10000.0f);
         }
+        GetNextDirWithRay();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -47,13 +48,10 @@ public class BulletBehaviour : MonoBehaviour {
     {
         coll = gameObject.GetComponent<CircleCollider2D>();
         rb2D = gameObject.GetComponent<Rigidbody2D>();
+        moveDir = transform.up;
     }
 
     //Methods
-    private void ApplyReflection(Collision2D coll)
-    {
-        GetNextDirFromReflection(coll);
-    }
     private void DelayAfterHit()
     {
         if(isPlayerHit)
@@ -79,18 +77,15 @@ public class BulletBehaviour : MonoBehaviour {
             isPlayerHit = true;
         }
     }
-    private float GetNextDirFromReflection(Collision2D coll)
+    private void GetNextDirWithRay()
     {
-        if(coll.collider.CompareTag("Wall"))
-        {
-            ContactPoint2D[] contacts = new ContactPoint2D[1];
-            int contactsLength = coll.GetContacts(contacts);
-            float _angle = Mathf.Asin(Vector3.Dot(contacts[0].normal, moveDir));
-            return _angle;
-        }
-        else
-        {
-            return 0.0f;
-        }
+        RaycastHit2D hit2D = new RaycastHit2D();
+        hit2D = Physics2D.Raycast(transform.position, moveDir, Mathf.Infinity);
+        //Debug.Log(Camera.main.WorldToScreenPoint(hit2D.point).ToString());
+        //Debug.Log(hit2D.collider.tag);
+        Debug.DrawRay(transform.position, moveDir, Color.red, 3f);
+        //float _moveDir_x = hit2D.point.x - transform.position.x;
+        //float _moveDir_y = hit2D.point.y - transform.position.y;
+        //moveDir = new Vector2(_moveDir_x, _moveDir_y);
     }
 }
