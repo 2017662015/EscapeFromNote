@@ -108,8 +108,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 0, g: 0.37446833, b: 1, a: 1}
   mPivot: 4
-  mWidth: 30
-  mHeight: 30
+  mWidth: 15
+  mHeight: 15
   mDepth: 8
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
