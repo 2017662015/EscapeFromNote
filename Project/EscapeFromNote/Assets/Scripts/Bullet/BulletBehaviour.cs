@@ -9,7 +9,7 @@ public class BulletBehaviour : MonoBehaviour {
     private EnemyBehaviour enemyBehaviour;
 
     //Variables
-    [SerializeField][Range(0.0f, 100.0f)]private float moveSpeed = 1.0f;
+    [SerializeField][Range(0.0f, 100.0f)]private float moveSpeed = 0.5f;
     private float currentTime = 0.0f;
     private Vector2 moveDir;
     private Vector2 nextMoveDir;
