@@ -108,8 +108,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
   mPivot: 4
-  mWidth: 30
-  mHeight: 30
+  mWidth: 15
+  mHeight: 15
   mDepth: 8
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
@@ -143,4 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ddca173c99af484dbebd1a91090583d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 0.5

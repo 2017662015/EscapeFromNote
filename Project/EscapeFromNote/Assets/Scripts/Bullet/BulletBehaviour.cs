@@ -9,14 +9,14 @@ public class BulletBehaviour : MonoBehaviour {
     private EnemyBehaviour enemyBehaviour;
 
     //Variables
-    [SerializeField][Range(0.0f, 100.0f)]private float moveSpeed = 1.0f;
+    [SerializeField][Range(0.0f, 100.0f)]private float moveSpeed = 0.5f;
     private float currentTime = 0.0f;
     private Vector2 moveDir;
     private Vector2 nextMoveDir;
 
     //Constants
     private const float BULLET_COLL_REACTIVE_DELAY_TIME = 0.2f;
-    private const float BULLET_LIFE_TIME = 10.0f;
+    private const float BULLET_LIFE_TIME = 20.0f;
 
     //Setter Methods
     public void SetMoveDir(Vector2 dir) { this.moveDir = dir; }
@@ -84,7 +84,7 @@ public class BulletBehaviour : MonoBehaviour {
     }
     private void CalculateNextDir(Collision2D coll)
     {
-        if (coll.collider.CompareTag("Wall"))
+        if (coll.collider.CompareTag("Wall") || coll.collider.CompareTag("Bullet"))
         {
             ContactPoint2D[] contacts = new ContactPoint2D[1];
             int contactCount = Physics2D.GetContacts(coll.collider, contacts);
