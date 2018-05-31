@@ -8,7 +8,7 @@ public class FountainPenMove : EnemyBehaviour {
     {
         base.Init();
         prefab_bullet = Resources.Load("Prefabs/BulletFountainPen") as GameObject;
-        bulletShotDelay = 1.0f;
+        bulletShotDelay = 2.0f;
     }
     protected override void OnInit()
     {

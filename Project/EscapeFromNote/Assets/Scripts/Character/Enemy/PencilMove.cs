@@ -9,7 +9,7 @@ public class PencilMove : EnemyBehaviour
     {
         base.Init();
         prefab_bullet = Resources.Load("Prefabs/BulletPencil") as GameObject;
-        bulletShotDelay = 2.0f;
+        bulletShotDelay = 3.0f;
     }
     protected override void OnInit()
     {

@@ -32,9 +32,9 @@ public class EnemyBehaviour : Character
     protected float ENEMY_SPAWN_DELAY_LENGTH = 0.5f;
 
     //Unity Callback Methods
-    protected override void OnCollisionEnter2D(Collision2D coll)
+    protected override void OnTriggerEnter2D(Collider2D coll)
     {
-        base.OnCollisionEnter2D(coll);
+        base.OnTriggerEnter2D(coll);
         HitByEraser(coll);
     }
     protected virtual void OnEnable()
@@ -158,9 +158,9 @@ public class EnemyBehaviour : Character
             disabledBullets.Add(_bullet);
         }
     }
-    private void HitByEraser(Collision2D coll)
+    private void HitByEraser(Collider2D coll)
     {
-        if (coll.collider.CompareTag("Eraser"))
+        if (coll.CompareTag("Eraser"))
         {
             currentState = BehaviourState.DIE;
         }

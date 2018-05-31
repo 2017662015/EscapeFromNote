@@ -16,7 +16,7 @@ public class BulletBehaviour : MonoBehaviour {
 
     //Constants
     private const float BULLET_COLL_REACTIVE_DELAY_TIME = 0.2f;
-    private const float BULLET_LIFE_TIME = 20.0f;
+    private const float BULLET_LIFE_TIME = 25.0f;
 
     //Setter Methods
     public void SetMoveDir(Vector2 dir) { this.moveDir = dir; }
