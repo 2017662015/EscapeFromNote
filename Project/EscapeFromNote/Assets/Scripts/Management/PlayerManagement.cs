@@ -122,9 +122,9 @@ public class PlayerManagement : Manager<PlayerManagement> {
                     case GameManagement.GameState.RESUME:
                         break;
                     case GameManagement.GameState.GAMEOVER:
+                        DestroyPlayer();
                         break;
                     case GameManagement.GameState.BACK_TO_TITLE:
-                        DestroyPlayer();
                         break;
                     default:
                         break;

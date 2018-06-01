@@ -14,6 +14,7 @@ public class GameManagement : Manager<GameManagement> {
         INIT,
         TITLE,
         OPTION_TITLE,
+        EXIT_TITLE,
         INIT_PLAY,
         PLAY,
         PAUSE,
@@ -30,7 +31,10 @@ public class GameManagement : Manager<GameManagement> {
     private Transform uiRoot;
     private Coroutine checkState;
     private StageManagement stageManagement;
+    private EnemyManagement enemyManagement;
     private PlayerManagement playerManagement;
+    private UIManagement uiManagment;
+    private ItemManagement itemManagement;
 
     //Variables
     private GameState currentState;
@@ -38,6 +42,7 @@ public class GameManagement : Manager<GameManagement> {
 
     //Setter Methods
     public void SetCurrentState(GameState state) { currentState = state; }
+    public GameState GetCurrentState() { return this.currentState; }
 
     //Unity Callback Methods
     protected override void OnEnable()
@@ -57,17 +62,18 @@ public class GameManagement : Manager<GameManagement> {
         previousState = GameState.NULL;
         stageManagement = StageManagement.GetInstance();
         playerManagement = PlayerManagement.GetInstance();
+        enemyManagement = EnemyManagement.GetInstance();
+        uiManagment = UIManagement.GetInstance();
+        itemManagement = ItemManagement.GetInstance();
         StartCoroutine(CheckState());
     }
 
     //State Machine Callback Methods
     private void OnInit()
     {
-        currentState = GameState.TITLE;
     }
     private void OnTitle()
     {
-        currentState = GameState.INIT_PLAY;
     }
     private void OnOptionTitle()
     {
@@ -90,6 +96,7 @@ public class GameManagement : Manager<GameManagement> {
     {
 
     }
+    private void OnExitTitle() { }
     private void OnResume()
     {
 
@@ -158,6 +165,11 @@ public class GameManagement : Manager<GameManagement> {
             if (previousState != currentState)
             {
                 previousState = currentState;
+                stageManagement.SetCurrentState(currentState);
+                playerManagement.SetCurrentState(currentState);
+                enemyManagement.SetCurrentState(currentState);
+                uiManagment.SetCurrentState(currentState);
+                itemManagement.SetCurrentState(currentState);
                 switch (currentState)
                 {
                     case GameState.INIT:
@@ -168,6 +180,9 @@ public class GameManagement : Manager<GameManagement> {
                         break;
                     case GameState.OPTION_TITLE:
                         OnOptionTitle();
+                        break;
+                    case GameState.EXIT_TITLE:
+                        OnExitTitle();
                         break;
                     case GameState.INIT_PLAY:
                         OnInitPlay();
@@ -196,8 +211,6 @@ public class GameManagement : Manager<GameManagement> {
                     default:
                         break;
                 }
-                stageManagement.SetCurrentState(currentState);
-                playerManagement.SetCurrentState(currentState);
             }
             yield return null;
         } while (true);

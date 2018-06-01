@@ -49,7 +49,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnDisable()
     {
-        inputArea.SetActive(false);
+        Destroy(inputArea);
     }
     //Initialize Methods of Class
     private void Init()
@@ -71,7 +71,7 @@ public class PlayerMove : MonoBehaviour
         if (currentGameState == GameManagement.GameState.PLAY)
         {
             #region //For Unity Editor
-#if UNITY_EDITOR
+            #if UNITY_EDITOR
             if (Input.GetMouseButtonDown(0))
                 {
                     initFingerPos = Input.mousePosition;
@@ -98,7 +98,7 @@ public class PlayerMove : MonoBehaviour
                     isFingerPressed = false;
                 }
             #endif
-        #endregion
+            #endregion
             #region //For Android and iOS
         #if UNITY_ANDROID || UNITY_IPHONE || UNITY_IPAD 
                 if(Input.touchCount > 0)

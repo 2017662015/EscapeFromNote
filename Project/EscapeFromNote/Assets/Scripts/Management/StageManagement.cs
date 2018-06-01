@@ -58,13 +58,18 @@ public class StageManagement : Manager<StageManagement>
             }
         }
     }
+    private void ResetStage()
+    {
+        stage = 0;
+        currentTime = 0;
+    }
 
     //Coroutines
     private IEnumerator CheckState()
     {
         do
         {
-            if(previousState != currentState)
+            if (previousState != currentState)
             {
                 previousState = currentState;
                 switch (currentState)
@@ -88,12 +93,13 @@ public class StageManagement : Manager<StageManagement>
                     case GameManagement.GameState.GAMEOVER:
                         break;
                     case GameManagement.GameState.BACK_TO_TITLE:
+                        ResetStage();
                         break;
                     default:
                         break;
                 }
             }
             yield return null;
-        } while (currentState != GameManagement.GameState.BACK_TO_TITLE);
+        } while (true);
     }
 }

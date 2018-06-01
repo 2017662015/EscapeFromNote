@@ -13,11 +13,23 @@ public class ItemPencilCaseConfig : MonoBehaviour
         if(coll.CompareTag("Player") && !isAssumed)
         {
             isAssumed = true;
-            gameObject.SetActive(false);
+            Destroy(this.gameObject);
         }
+    }
+    private void OnEnable()
+    {
+        StartCoroutine(CheckGameEnds());
     }
     private void OnDisabled()
     {
         isAssumed = false;
+    }
+    private IEnumerator CheckGameEnds()
+    {
+        do
+        {
+            yield return new WaitForEndOfFrame();
+        } while (GameManagement.GetInstance().GetCurrentState() != GameManagement.GameState.GAMEOVER);
+        Destroy(this.gameObject);
     }
 }

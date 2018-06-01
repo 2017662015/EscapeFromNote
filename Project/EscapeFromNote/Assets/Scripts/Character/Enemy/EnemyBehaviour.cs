@@ -7,6 +7,7 @@ public class EnemyBehaviour : Character
 {
     //Prefab Instances
     protected GameObject prefab_bullet;
+    protected GameObject prefab_item_pencilcase;
 
     //Instances
     protected Transform target;
@@ -20,6 +21,7 @@ public class EnemyBehaviour : Character
     protected StageManagement stageManagement;
 
     //Variables
+    protected bool isPencilCaseContained;
     protected int currentStage = 0;
     protected int bulletSpawnPosesCount;
     protected int bulletCountOfStage;
@@ -30,6 +32,8 @@ public class EnemyBehaviour : Character
 
     //Constants
     protected float ENEMY_SPAWN_DELAY_LENGTH = 0.5f;
+
+    public void SetIsPencilCaseContained(bool condition) { this.isPencilCaseContained = condition; }
 
     //Unity Callback Methods
     protected override void OnTriggerEnter2D(Collider2D coll)
@@ -75,7 +79,7 @@ public class EnemyBehaviour : Character
         stageManagement = StageManagement.GetInstance();
         uiSprite = gameObject.GetComponent<UISprite>();
         boxColl = gameObject.GetComponent<BoxCollider2D>();
-        
+        prefab_item_pencilcase = Resources.Load("Prefabs/Item_PencilCase") as GameObject;
     }
 
     //Finalize Method of this class
@@ -115,12 +119,17 @@ public class EnemyBehaviour : Character
     }
     protected override void OnSkill()
     {
+        ClearAllBullet();
     }
     protected override void OnDamaged()
     {
     }
     protected override void OnDie()
     {
+        if (isPencilCaseContained)
+        {
+            Instantiate(prefab_item_pencilcase, Camera.main.WorldToScreenPoint(gameObject.transform.position), Quaternion.identity);
+        }
         uiSprite.enabled = false;
         boxColl.enabled = false;
         StartCoroutine(WaitForFinalize());
@@ -182,6 +191,21 @@ public class EnemyBehaviour : Character
                 }
             }
         }
+    }
+    public void ClearAllBullet()
+    {
+        int i = 0;
+        do
+        {
+            if (bullets[i].activeSelf)
+            {
+                bullets[i].SetActive(false);
+                disabledBullets.Add(bullets[i]);
+                aliveBulletCount--;
+            }
+            i++;
+        } while (disabledBullets.Count != bullets.Count);
+        currentState = BehaviourState.IDLE;
     }
     private int GetBulletSpawnPoses()
     {

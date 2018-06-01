@@ -14,9 +14,10 @@ public class ItemEraserConfig : MonoBehaviour {
         {
             isAssumed = true;
             gameObject.SetActive(false);
+
         }
     }
-    private void OnDisabled()
+    private void OnEnabled()
     {
         isAssumed = false;
     }

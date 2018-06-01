@@ -13,7 +13,6 @@ public class PlayerInf : Character
     private Transform weaponAxis;
     private TweenColor tweenColor;
     private Coroutine checkEraserCount;
-    private PlayerAnim playerAnim;
     private PlayerMove playerMove;
     private List<GameObject> erasers;
     private List<Transform> eraserPosAxises;
@@ -26,14 +25,13 @@ public class PlayerInf : Character
     private int previousEraserCount = 0;
     [SerializeField][Range(3, 4)]private int eraserSpaceCount = 0;
     [SerializeField]private float whiteSpawnElapsedTime = 0.0f;
-    private float eraserSpawnElapsedTime = 0.0f;
 
     //Constants
     private const int PLAYER_ERASER_COUNT_INIT = 3;
     private const int PLAYER_ERASER_COUNT_MAX = 4;
-    private const int PLAYER_HP_INIT = 7;
+    private const int PLAYER_HP_INIT = 2;
     private const float PLAYER_ERASER_SPAWN_TIME = 10.0f;
-    private const float PLAYER_WEAPON_ROTATION_SPEED = 100.0f;
+    private const float PLAYER_WEAPON_ROTATION_SPEED = 1000.0f;
     private const float PLAYER_WHITE_SPAWN_TIME = 30.0f;
 
     //Getters
@@ -67,7 +65,6 @@ public class PlayerInf : Character
     {
         base.Init();
         prefab_eraser = Resources.Load("Prefabs/Eraser") as GameObject;
-        playerAnim = gameObject.GetComponent<PlayerAnim>();
         playerMove = gameObject.GetComponent<PlayerMove>();
         tweenColor = gameObject.GetComponent<TweenColor>();
         checkState = StartCoroutine(CheckState());
@@ -95,7 +92,7 @@ public class PlayerInf : Character
     }
     protected override void OnSkill()
     {
-        throw new NotImplementedException();
+        isWhiteEquipped = false;
     }
     protected override void OnDamaged()
     {
@@ -118,6 +115,7 @@ public class PlayerInf : Character
         StopCoroutine(checkState);
         checkEraserCount = null;
         checkState = null;
+        isPencilCaseEquipped = false;
         GameManagement.GetInstance().SetCurrentState(GameManagement.GameState.GAMEOVER);
         gameObject.SetActive(false);
     }
@@ -158,6 +156,8 @@ public class PlayerInf : Character
         if (coll.CompareTag("Item_PencilCase"))
         {
             IncreaseEraserSpaceCount();
+            isPencilCaseEquipped = true;
+            ItemManagement.GetInstance().SetIsPlayerPencilCaseEquipped(true);
         }
     }
     private void CheckHitByEnemy(Collision2D coll)
@@ -222,6 +222,7 @@ public class PlayerInf : Character
                 if(whiteSpawnElapsedTime > PLAYER_WHITE_SPAWN_TIME)
                 {
                     isWhiteEquipped = true;
+                    UIManagement.GetInstance().GetGameSceneBG_white().SetActive(true);
                     whiteSpawnElapsedTime = 0;
                 }
             }
@@ -266,6 +267,7 @@ public class PlayerInf : Character
             if (previousState != currentState)
             {
                 previousState = currentState;
+                playerMove.SetCurrentState(currentState);
                 switch (currentState)
                 {
                     case BehaviourState.INIT:
@@ -298,7 +300,6 @@ public class PlayerInf : Character
                     default:
                         break;
                 }
-                playerMove.SetCurrentState(currentState);
             }
             yield return null;
         } while (true);
