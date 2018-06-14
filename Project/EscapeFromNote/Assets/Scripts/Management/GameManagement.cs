@@ -35,6 +35,7 @@ public class GameManagement : Manager<GameManagement> {
     private PlayerManagement playerManagement;
     private UIManagement uiManagment;
     private ItemManagement itemManagement;
+    private ScoreManagement scoreManagement;
 
     //Variables
     private GameState currentState;
@@ -65,6 +66,7 @@ public class GameManagement : Manager<GameManagement> {
         enemyManagement = EnemyManagement.GetInstance();
         uiManagment = UIManagement.GetInstance();
         itemManagement = ItemManagement.GetInstance();
+        scoreManagement = ScoreManagement.GetInstance();
         StartCoroutine(CheckState());
     }
 
@@ -166,6 +168,7 @@ public class GameManagement : Manager<GameManagement> {
             {
                 previousState = currentState;
                 stageManagement.SetCurrentState(currentState);
+                scoreManagement.SetCurrentState(currentState);
                 playerManagement.SetCurrentState(currentState);
                 enemyManagement.SetCurrentState(currentState);
                 uiManagment.SetCurrentState(currentState);

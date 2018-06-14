@@ -17,7 +17,7 @@ public class ItemManagement : Manager<ItemManagement> {
     private GameManagement.GameState currentState;
     private GameManagement.GameState previousState;
 
-    private const int ERASER_MAX_SPAWNABLE_COUNT = 3;
+    private const int ERASER_MAX_SPAWNABLE_COUNT = 4;
     private const float ERASER_SPAWN_DELAY = 20.0f;
 
     public void SetCurrentState(GameManagement.GameState state) { this.currentState = state; }
@@ -91,7 +91,7 @@ public class ItemManagement : Manager<ItemManagement> {
         {
             if (!item_eraser.activeSelf)
             {
-                if(spawnedEraserCount < ERASER_MAX_SPAWNABLE_COUNT - 1)
+                if(spawnedEraserCount < ERASER_MAX_SPAWNABLE_COUNT)
                 {
                     if(currentTime < ERASER_SPAWN_DELAY)
                     {

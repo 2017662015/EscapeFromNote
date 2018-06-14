@@ -2,23 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemEraserConfig : MonoBehaviour {
-
-    //Variables
-    private bool isAssumed;
+public class ItemEraserConfig : MonoBehaviour
+{
 
     //Unity Callback Methods
     private void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.CompareTag("Player") && !isAssumed)
+        if (coll.CompareTag("Player"))
         {
-            isAssumed = true;
             gameObject.SetActive(false);
 
         }
-    }
-    private void OnEnabled()
-    {
-        isAssumed = false;
     }
 }

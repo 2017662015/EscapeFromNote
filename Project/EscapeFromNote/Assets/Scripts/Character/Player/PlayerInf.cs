@@ -31,7 +31,7 @@ public class PlayerInf : Character
     private const int PLAYER_ERASER_COUNT_MAX = 4;
     private const int PLAYER_HP_INIT = 2;
     private const float PLAYER_ERASER_SPAWN_TIME = 10.0f;
-    private const float PLAYER_WEAPON_ROTATION_SPEED = 1000.0f;
+    private const float PLAYER_WEAPON_ROTATION_SPEED = 500.0f;
     private const float PLAYER_WHITE_SPAWN_TIME = 30.0f;
 
     //Getters

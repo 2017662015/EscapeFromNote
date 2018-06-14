@@ -128,7 +128,7 @@ public class EnemyBehaviour : Character
     {
         if (isPencilCaseContained)
         {
-            Instantiate(prefab_item_pencilcase, Camera.main.WorldToScreenPoint(gameObject.transform.position), Quaternion.identity);
+            Instantiate(prefab_item_pencilcase, Camera.main.WorldToScreenPoint(gameObject.transform.position), Quaternion.identity, uiRoot);
         }
         uiSprite.enabled = false;
         boxColl.enabled = false;
@@ -172,6 +172,7 @@ public class EnemyBehaviour : Character
         if (coll.CompareTag("Eraser"))
         {
             currentState = BehaviourState.DIE;
+            ScoreManagement.GetInstance().IncreaseKilledEnemyCount();
         }
     }
     private void WaitForShot()

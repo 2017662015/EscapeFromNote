@@ -27,6 +27,8 @@ public class UIManagement : Manager<UIManagement>
     private GameObject exitBG_no;
     private GameObject gameOverBG_back;
     private GameObject gameSceneBG_white;
+    private GameObject gameSceneBG_score;
+    private GameObject gameSceneBG_time;
     private Transform uiTransform;
     private GameManagement gameManagement;
     private StageManagement stageManagement;
@@ -86,6 +88,8 @@ public class UIManagement : Manager<UIManagement>
 
         gameOverBG_back = gameOverBG.transform.GetChild(4).gameObject;
 
+        gameSceneBG_score = gameSceneBG.transform.GetChild(0).gameObject;
+        gameSceneBG_time = gameSceneBG.transform.GetChild(1).gameObject;
         gameSceneBG_white = gameSceneBG.transform.GetChild(2).gameObject;
 
         AddOnClick(startSceneBG_play, "OnPressedPlayInTitle");
@@ -132,10 +136,13 @@ public class UIManagement : Manager<UIManagement>
     {
         startSceneBG.SetActive(false);
         gameSceneBG.SetActive(true);
+        gameSceneBG_score.SetActive(false);
+        gameSceneBG_time.SetActive(false);
     }
     private void OnPlay()
     {
-
+        gameSceneBG_score.SetActive(true);
+        gameSceneBG_time.SetActive(true);
     }
     private void OnPause()
     {
