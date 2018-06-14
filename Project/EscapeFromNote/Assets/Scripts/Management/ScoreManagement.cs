@@ -11,6 +11,7 @@ public class ScoreManagement : Manager<ScoreManagement>
     private int stageScoreSum;
     private int nextStageScore = 0;
     private float elapsedTime;
+    private float timeFactor = 0;
     private GameManagement.GameState currentState;
     private GameManagement.GameState previousState;
     private Character.BehaviourState currentBehaviourState;
@@ -21,6 +22,11 @@ public class ScoreManagement : Manager<ScoreManagement>
     private const int SCORE_TIME_UNIT = 2;
     private const int SCORE_STAGE_UNIT = 100;
 
+    public int GetKilledEnemyCount() { return this.killedEnemyCount; }
+    public int GetElapsedStage() { return this.elapsedStage; }
+    public int GetElapsedTime() { return (int)this.elapsedTime; }
+    public int GetStageScoreSum() { return this.stageScoreSum; }
+    
     public void IncreaseKilledEnemyCount() { killedEnemyCount++; }
     public void SetCurrentState(GameManagement.GameState state) { this.currentState = state; }
     public void SetCurrentBehaviourState(Character.BehaviourState state) { this.currentBehaviourState = state; }
@@ -33,6 +39,7 @@ public class ScoreManagement : Manager<ScoreManagement>
     private void Update()
     {
         GettingElaspedTime();
+        SumTimeScore();
     }
 
     private void Init()
@@ -41,6 +48,7 @@ public class ScoreManagement : Manager<ScoreManagement>
         killedEnemyCount = 0;
         elapsedTime = 0;
         StartCoroutine(CheckState());
+        StartCoroutine(CheckBehaviourState());
     }
 
     private void GettingElaspedTime()
@@ -52,16 +60,43 @@ public class ScoreManagement : Manager<ScoreManagement>
     }
     private void SumStageScore()
     {
+        nextStageScore = SCORE_STAGE_UNIT * (elapsedStage - 1);
         stageScoreSum += nextStageScore;
-        nextStageScore = SCORE_STAGE_UNIT * elapsedStage;
     }
 
     private void OnGoToNextStage()
     {
-        SumStageScore();
+        if (elapsedStage > 1)
+        {
+            SumStageScore();
+        }
         currentBehaviourState = Character.BehaviourState.IDLE;
     }
 
+    private void SumTimeScore()
+    {
+        if (currentState == GameManagement.GameState.PLAY)
+        {
+            if (timeFactor < 1.0f)
+            {
+                timeFactor += Time.deltaTime;
+            }
+            else
+            {
+                stageScoreSum += (elapsedStage * SCORE_TIME_UNIT) + SCORE_TIME_INIT;
+                timeFactor = 0;
+            }
+        }
+    }
+    private void OnBackToTitle()
+    {
+        killedEnemyCount = 0;
+        elapsedStage = 0;
+        stageScoreSum = 0;
+        nextStageScore = 0;
+        elapsedTime = 0;
+        timeFactor = 0;
+    }
     //Coroutines
     private IEnumerator CheckState()
     {
@@ -94,6 +129,7 @@ public class ScoreManagement : Manager<ScoreManagement>
                     case GameManagement.GameState.GAMEOVER:
                         break;
                     case GameManagement.GameState.BACK_TO_TITLE:
+                        OnBackToTitle();
                         break;
                     default:
                         break;

@@ -36,6 +36,7 @@ public class GameManagement : Manager<GameManagement> {
     private UIManagement uiManagment;
     private ItemManagement itemManagement;
     private ScoreManagement scoreManagement;
+    private SoundManagement soundManagement;
 
     //Variables
     private GameState currentState;
@@ -67,6 +68,7 @@ public class GameManagement : Manager<GameManagement> {
         uiManagment = UIManagement.GetInstance();
         itemManagement = ItemManagement.GetInstance();
         scoreManagement = ScoreManagement.GetInstance();
+        soundManagement = SoundManagement.GetInstance();
         StartCoroutine(CheckState());
     }
 
@@ -173,6 +175,7 @@ public class GameManagement : Manager<GameManagement> {
                 enemyManagement.SetCurrentState(currentState);
                 uiManagment.SetCurrentState(currentState);
                 itemManagement.SetCurrentState(currentState);
+                soundManagement.SetCurrentState(currentState);
                 switch (currentState)
                 {
                     case GameState.INIT:

@@ -32,6 +32,12 @@ public class UIManagement : Manager<UIManagement>
     private Transform uiTransform;
     private GameManagement gameManagement;
     private StageManagement stageManagement;
+    private ScoreManagement scoreManagement;
+    private UILabel gameSceneBG_scoreText;
+    private UILabel gameSceneBG_timeText;
+    private UILabel gameOverBG_killTheEnemyText;
+    private UILabel gameOverBG_timeText;
+    private UILabel gameOverBG_scoreText;
 
     //Variables
     private float titleFactor = 0.0f;
@@ -40,7 +46,7 @@ public class UIManagement : Manager<UIManagement>
 
     //Constants
     private const float TITLE_SPLESH_LENGTH = 3.0f;
-    
+
     public GameObject GetGameSceneBG_white() { return this.gameSceneBG_white; }
 
     public void SetCurrentState(GameManagement.GameState state) { this.currentState = state; }
@@ -48,6 +54,7 @@ public class UIManagement : Manager<UIManagement>
     private void Update()
     {
         WaitForTitleSplash();
+        GameScoreUpdate();
     }
 
     protected override void OnEnable()
@@ -69,6 +76,8 @@ public class UIManagement : Manager<UIManagement>
 
         uiTransform = GameObject.Find("UI").transform;
         gameManagement = GameManagement.GetInstance();
+        scoreManagement = ScoreManagement.GetInstance();
+        stageManagement = StageManagement.GetInstance();
 
         beginBG = Instantiate<GameObject>(prefab_beginBG, uiTransform);
         exitBG = Instantiate<GameObject>(prefab_exitBG, uiTransform);
@@ -86,11 +95,16 @@ public class UIManagement : Manager<UIManagement>
         exitBG_yes = exitBG.transform.GetChild(1).gameObject;
         exitBG_no = exitBG.transform.GetChild(2).gameObject;
 
+        gameOverBG_killTheEnemyText = gameOverBG.transform.GetChild(5).GetComponent<UILabel>();
+        gameOverBG_scoreText = gameOverBG.transform.GetChild(7).GetComponent<UILabel>();
+        gameOverBG_timeText = gameOverBG.transform.GetChild(6).GetComponent<UILabel>();
         gameOverBG_back = gameOverBG.transform.GetChild(4).gameObject;
 
         gameSceneBG_score = gameSceneBG.transform.GetChild(0).gameObject;
         gameSceneBG_time = gameSceneBG.transform.GetChild(1).gameObject;
         gameSceneBG_white = gameSceneBG.transform.GetChild(2).gameObject;
+        gameSceneBG_scoreText = gameSceneBG.transform.GetChild(7).GetComponent<UILabel>();
+        gameSceneBG_timeText = gameSceneBG.transform.GetChild(8).GetComponent<UILabel>();
 
         AddOnClick(startSceneBG_play, "OnPressedPlayInTitle");
         AddOnClick(startSceneBG_option, "OnPressedOptionInTitle");
@@ -138,11 +152,15 @@ public class UIManagement : Manager<UIManagement>
         gameSceneBG.SetActive(true);
         gameSceneBG_score.SetActive(false);
         gameSceneBG_time.SetActive(false);
+        gameSceneBG_scoreText.gameObject.SetActive(false);
+        gameSceneBG_timeText.gameObject.SetActive(false);
     }
     private void OnPlay()
     {
         gameSceneBG_score.SetActive(true);
         gameSceneBG_time.SetActive(true);
+        gameSceneBG_timeText.gameObject.SetActive(true);
+        gameSceneBG_scoreText.gameObject.SetActive(true);
     }
     private void OnPause()
     {
@@ -161,10 +179,11 @@ public class UIManagement : Manager<UIManagement>
         gameSceneBG_white.SetActive(false);
         gameSceneBG.SetActive(false);
         gameOverBG.SetActive(true);
+        GameOverScoreUpdate();
     }
     private void OnBackToTitle()
     {
-        
+
     }
     private void OnFinalize()
     {
@@ -179,9 +198,9 @@ public class UIManagement : Manager<UIManagement>
     }
     private void WaitForTitleSplash()
     {
-        if(currentState == GameManagement.GameState.INIT)
+        if (currentState == GameManagement.GameState.INIT)
         {
-            if(titleFactor < TITLE_SPLESH_LENGTH)
+            if (titleFactor < TITLE_SPLESH_LENGTH)
             {
                 titleFactor += Time.deltaTime;
             }
@@ -225,6 +244,22 @@ public class UIManagement : Manager<UIManagement>
         GameObject.Find("Player").GetComponent<PlayerInf>().SetCurrentState(Character.BehaviourState.SKILL);
         gameSceneBG_white.SetActive(false);
     }
+    private void GameScoreUpdate()
+    {
+        if (currentState == GameManagement.GameState.PLAY)
+        {
+            gameSceneBG_scoreText.text = scoreManagement.GetStageScoreSum().ToString();
+            gameSceneBG_timeText.text = scoreManagement.GetElapsedTime().ToString();
+        }
+    }
+
+    private void GameOverScoreUpdate()
+    {
+        gameOverBG_killTheEnemyText.text = scoreManagement.GetKilledEnemyCount().ToString();
+        gameOverBG_scoreText.text = scoreManagement.GetStageScoreSum().ToString();
+        gameOverBG_timeText.text = scoreManagement.GetElapsedTime().ToString();
+    }
+
 
     //Coroutines
     private IEnumerator CheckState()
