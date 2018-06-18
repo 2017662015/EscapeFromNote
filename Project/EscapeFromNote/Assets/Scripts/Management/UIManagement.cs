@@ -241,7 +241,7 @@ public class UIManagement : Manager<UIManagement>
     }
     private void OnPressedWhiteInGame()
     {
-        GameObject.Find("Player").GetComponent<PlayerInf>().SetCurrentState(Character.BehaviourState.SKILL);
+        EnemyManagement.GetInstance().CallSkillEnabled();
         gameSceneBG_white.SetActive(false);
     }
     private void GameScoreUpdate()

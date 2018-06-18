@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyManagement : Manager<EnemyManagement> {
     //Enums
@@ -12,11 +13,12 @@ public class EnemyManagement : Manager<EnemyManagement> {
     private GameObject prefab_fountainPen;
 
     //Instances
-    private Vector2 enemySize = new Vector2(20, 90);
+    private Vector2 enemySize = new Vector2(1, 1);
     private Transform uiRoot;
     private StageManagement stageManagement;
     private List<GameObject> enemys;
     private List<GameObject> disabledEnemys;
+    private Vector2 spawnPos;
 
     //Variables
     private bool isPencilCaseSetted;
@@ -37,6 +39,12 @@ public class EnemyManagement : Manager<EnemyManagement> {
     private void Update()
     {
         WaitForEnemySpawn();
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(spawnPos, Camera.main.ScreenToWorldPoint(enemySize));
+        Debug.Log(Camera.main.ScreenToWorldPoint(enemySize));
     }
     protected override void OnEnable()
     {
@@ -81,7 +89,6 @@ public class EnemyManagement : Manager<EnemyManagement> {
         }
         stage = Mathf.Clamp(stage, 0, 3);
         int i = 0;
-        GameObject _enemy;
         if (stage > 0)
         {
             do
@@ -98,37 +105,13 @@ public class EnemyManagement : Manager<EnemyManagement> {
                 switch (currentEnemyType)
                 {
                     case EnemyType.PENCIL:
-                        _enemy = Instantiate<GameObject>(prefab_pencil, uiRoot);
-                        if (Random.Range(0.0f, 1.0f) > 0.8f && !isPencilCaseSetted)
-                        {
-                            isPencilCaseSetted = true;
-                            _enemy.GetComponent<EnemyBehaviour>().SetIsPencilCaseContained(true);
-                        }
-                        _enemy.SetActive(false);
-                        enemys.Add(_enemy);
-                        disabledEnemys.Add(_enemy);
+                        InstantiateEnemy(prefab_pencil, uiRoot);
                         break;
                     case EnemyType.BALLPEN:
-                        _enemy = Instantiate<GameObject>(prefab_ballPen, uiRoot);
-                        if (Random.Range(0.0f, 1.0f) > 0.8f && !isPencilCaseSetted)
-                        {
-                            isPencilCaseSetted = true;
-                            _enemy.GetComponent<EnemyBehaviour>().SetIsPencilCaseContained(true);
-                        }
-                        _enemy.SetActive(false);
-                        enemys.Add(_enemy);
-                        disabledEnemys.Add(_enemy);
+                        InstantiateEnemy(prefab_ballPen, uiRoot);
                         break;
                     case EnemyType.FOUNTAINPEN:
-                        _enemy = Instantiate<GameObject>(prefab_fountainPen, uiRoot);
-                        if (Random.Range(0.0f, 1.0f) > 0.8f && !isPencilCaseSetted)
-                        {
-                            isPencilCaseSetted = true;
-                            _enemy.GetComponent<EnemyBehaviour>().SetIsPencilCaseContained(true);
-                        }
-                        _enemy.SetActive(false);
-                        enemys.Add(_enemy);
-                        disabledEnemys.Add(_enemy);
+                        InstantiateEnemy(prefab_fountainPen, uiRoot);
                         break;
                 }
             } while (enemys.Count != enemyCountOfStage);
@@ -143,20 +126,22 @@ public class EnemyManagement : Manager<EnemyManagement> {
         {
             do
             {
-                _randX = Random.Range(0 + (enemySize.x / 2), 720 - (enemySize.x / 2));
-                _randY = Random.Range(0 + (enemySize.y / 2), 1280 - (enemySize.x / 2));
-                Vector2 _spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(_randX, _randY));
-                RaycastHit2D hit2D = Physics2D.BoxCast(_spawnPos, Camera.main.ScreenToWorldPoint(enemySize), 0.0f, Vector2.up);
-                Debug.DrawRay(_spawnPos, Vector3.forward, Color.red, 1f);
+                _randX = Random.Range(0 + enemySize.x, GameManagement.DEVICE_SCREEN_WIDTH - enemySize.x);
+                _randY = Random.Range(0 + enemySize.y, GameManagement.DEVICE_SCREEN_HEIGHT - enemySize.y);
+                spawnPos = UICamera.mainCamera.ScreenToWorldPoint(new Vector2(_randX, _randY));
+                RaycastHit2D hit2D = Physics2D.BoxCast(spawnPos, UICamera.mainCamera.ScreenToWorldPoint(enemySize), 0.0f, Vector3.forward, Mathf.Infinity);
+                Debug.Log(UICamera.mainCamera.ScreenToWorldPoint(enemySize) * 2);
+                Debug.DrawRay(spawnPos, Vector3.forward, Color.red, 1f);
                 if (hit2D)
                 {
-                    if (hit2D.collider.CompareTag("Enemy") || hit2D.collider.CompareTag("Bullet") || hit2D.collider.CompareTag("Player") || hit2D.collider.CompareTag("Eraser"))
+                    Debug.Log(hit2D.collider.tag);
+                    if (hit2D.collider.CompareTag("Enemy") || hit2D.collider.CompareTag("Bullet") || hit2D.collider.CompareTag("Player") || hit2D.collider.CompareTag("Eraser") || hit2D.collider.CompareTag("Wall"))
                     {
                         _count++;
                     }
                     else
                     {
-                        disabledEnemys[0].transform.position = _spawnPos;
+                        disabledEnemys[0].transform.position = spawnPos;
                         disabledEnemys[0].SetActive(true);
                         disabledEnemys.RemoveAt(0);
                         isFound = true;
@@ -164,7 +149,7 @@ public class EnemyManagement : Manager<EnemyManagement> {
                 }
                 else
                 {
-                    disabledEnemys[0].transform.position = _spawnPos;
+                    disabledEnemys[0].transform.position = spawnPos;
                     disabledEnemys[0].SetActive(true);
                     disabledEnemys.RemoveAt(0);
                     isFound = true;
@@ -202,12 +187,25 @@ public class EnemyManagement : Manager<EnemyManagement> {
         enemyCountOfStage = 0;
         isPencilCaseSetted = false;
     }
+    private void InstantiateEnemy(GameObject prefab_enemy, Transform parentTr)
+    {
+        GameObject _enemy;
+        _enemy = Instantiate<GameObject>(prefab_enemy, parentTr);
+        if (Random.Range(0.0f, 1.0f) > 0.8f && !isPencilCaseSetted)
+        {
+            isPencilCaseSetted = true;
+            _enemy.GetComponent<EnemyBehaviour>().SetIsPencilCaseContained(true);
+        }
+        _enemy.SetActive(false);
+        enemys.Add(_enemy);
+        disabledEnemys.Add(_enemy);
+    }
+    public void CallSkillEnabled() { StartCoroutine(SkillEnabled()); }
+
     private int GetEnemyCountOfStage()
     {
         return (int)(StageManagement.STAGE_INTERVAL_TIME / spawnDelay);
     }
-
-
     //Coroutines
     private IEnumerator CheckState()
     {
@@ -281,5 +279,18 @@ public class EnemyManagement : Manager<EnemyManagement> {
             }
             yield return null;
         } while (true);
+    }
+    private IEnumerator SkillEnabled()
+    {
+        int i = 0;
+        do
+        {
+            if (enemys[i].activeSelf)
+            {
+                enemys[i].GetComponent<EnemyBehaviour>().CallClearAllBullet();
+            }
+            i++;
+            yield return null;
+        } while (i < enemys.Count);
     }
 }

@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/user/Documents/2017662015/EscapeFromNote/Project/EscapeFromNote/0.1.0002.apk
+C:/Users/User/Documents/2017662015/EscapeFromNote/Project/EscapeFromNote/0.1.0003.apk
 SceneListBegin?
 Assets/Scenes/EscapeFromNote.unity
 SceneListEnd?
@@ -158,6 +158,7 @@ feea9fa519f717332c191791acaf5381 Assembly-CSharp.dll:.UISnapshotPoint
 c4a75f38edea8a816bd024aa376031be Assembly-CSharp.dll:.TweenFOV
 b2b7fe871a51c58a929bd270b5fb0041 Assembly-CSharp.dll:.UIPlayAnimation
 ef09686cacab03d94a8cc14711428c6b Assembly-CSharp.dll:.DownloadTexture
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SoundManagement
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ItemManagement
 0ed5bc3d58c26257dfd7c50b3fcaafb7 Assembly-CSharp.dll:.UICenterOnChild
 136c2a49bb0374d3a30c982b57b1deb1 Assembly-CSharp.dll:.UIRoot
@@ -204,6 +205,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 d146d3d8148b2f35a8c7980d63a88f0e Assembly-CSharp.dll:.UICursor
 2a026ea4234d4b6565ba533c90e5a2f8 Assembly-CSharp.dll:.TweenRotation
 e568ac27d5617cc8aba0434496cfdd33 Assembly-CSharp.dll:.UIPopupList
+25b963d756c019ee82dfc61d53c38a8f com.unity.2d.animation.Runtime.dll:UnityEngine.Experimental.U2D.Animation.SpriteSkin
 da9f29ffd5c4f0ac8282bf265db79688 Assembly-CSharp.dll:.TypewriterEffect
 87850b8e331cb17df6147150299d2208 Assembly-CSharp.dll:.UIColorPicker
 5f090821814bc51a9f55429c0fa2da3e Assembly-CSharp.dll:.UIDragDropContainer
@@ -224,6 +226,7 @@ f02726adeff0a3ec5905565234b372da UnityEngine.TestRunner.dll:UnityEngine.TestTool
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 67a5f2c97205d2e41a8ed7c7ce898f6e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 67a5f2c97205d2e41a8ed7c7ce898f6e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
+921262cb9ce7ce7b7f67642d8f4c1827 com.unity.2d.ik.Runtime.dll:UnityEngine.Experimental.U2D.IK.FabrikSolver2D
 483f4fde2e4a9df95cf9f42ed3a9093c Assembly-CSharp.dll:.UIProgressBar
 f2d1d8bd46ac314eebf726fd43c91eea Assembly-CSharp.dll:.UIDragScrollView
 9e0ef5bf862444b5dc48b5a99554ce7c UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioListenerExtension
@@ -243,6 +246,7 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 b533a55bac6b0ef81fc95d63b2d4c3a9 Assembly-CSharp.dll:.UIButtonRotation
+a5804f54146781525cd5807068d12315 com.unity.2d.ik.Runtime.dll:UnityEngine.Experimental.U2D.IK.LimbSolver2D
 b7eb86aae1e536bd0ed95c3ef6abf7ab Assembly-CSharp.dll:.UIWrapContent
 b533a55bac6b0ef81fc95d63b2d4c3a9 Assembly-CSharp.dll:.UIButtonOffset
 8bcf0e2fc311c0d6b27eab08d5283224 Assembly-CSharp.dll:.WindowDragTilt
@@ -271,21 +275,17 @@ f55492bcd9d3c95b5981d8fd2428b885 Assembly-CSharp.dll:.UIDragDropItem
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.LanguageSelection
 01ca127772bebd003dc266e41c6d18bc Assembly-CSharp.dll:.UIDragCamera
 a37388e9173444b5bc8fed9952167aed Assembly-CSharp.dll:.UISlider
+dcd5305253d0ab2bac2df27cf93ed8a9 com.unity.2d.ik.Runtime.dll:UnityEditor.Experimental.U2D.IK.IKEditorManagerHelper
 0d65321df9ad158e68e737d27f7281e2 Assembly-CSharp.dll:.UITable
 bcdcaf8839db68b83c8c16ec5024c6cc Assembly-CSharp.dll:.ActiveAnimation
 af3c0485a6cfbede261a88cc1b5f8384 Assembly-CSharp.dll:.UI2DSprite
 9921a9f88a3288e106af12d6e3200e55 Assembly-CSharp.dll:.InvDatabase
 a0eede1b5b36a25e94c81bef0c6bc660 Assembly-CSharp.dll:.UIImageButton
 a4eabebcf83f138d76a7d684d942ecc9 Assembly-CSharp.dll:.EquipItems
+aa357ed0e5d310624128a0c8ea6b1a2c com.unity.2d.ik.Runtime.dll:UnityEngine.Experimental.U2D.IK.IKManager2D
 e7ae6e9ee8a8a6b2d7860a7212a8416e Assembly-CSharp.dll:.EquipRandomItem
 697b2a99286e9715f6a9eb40c1a24c2f Assembly-CSharp.dll:.UI2DSpriteAnimation
 99ca7431436b7d3343aaef26acba433a Assembly-CSharp.dll:.UISprite
+e7b08aed70d9ece38084759a8f4b7f68 com.unity.2d.ik.Runtime.dll:UnityEngine.Experimental.U2D.IK.CCDSolver2D
 fcffe9bbf1b7b7e4593e31031f78987b Assembly-CSharp.dll:.UISliderColors
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RealTime
-aa357ed0e5d310624128a0c8ea6b1a2c com.unity.2d.ik.Runtime.dll:UnityEngine.Experimental.U2D.IK.IKManager2D
-a5804f54146781525cd5807068d12315 com.unity.2d.ik.Runtime.dll:UnityEngine.Experimental.U2D.IK.LimbSolver2D
-25b963d756c019ee82dfc61d53c38a8f com.unity.2d.animation.Runtime.dll:UnityEngine.Experimental.U2D.Animation.SpriteSkin
-dcd5305253d0ab2bac2df27cf93ed8a9 com.unity.2d.ik.Runtime.dll:UnityEditor.Experimental.U2D.IK.IKEditorManagerHelper
-921262cb9ce7ce7b7f67642d8f4c1827 com.unity.2d.ik.Runtime.dll:UnityEngine.Experimental.U2D.IK.FabrikSolver2D
-e7b08aed70d9ece38084759a8f4b7f68 com.unity.2d.ik.Runtime.dll:UnityEngine.Experimental.U2D.IK.CCDSolver2D
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SoundManagement

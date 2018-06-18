@@ -56,8 +56,8 @@ public class ItemManagement : Manager<ItemManagement> {
         {
             do
             {
-                _randX = Random.Range(0 + (eraserSize.x / 2), 720 - (eraserSize.x / 2));
-                _randY = Random.Range(0 + (eraserSize.y / 2), 1280 - (eraserSize.x / 2));
+                _randX = Random.Range(0 + (eraserSize.x / 2), GameManagement.DEVICE_SCREEN_WIDTH - (eraserSize.x / 2));
+                _randY = Random.Range(0 + (eraserSize.y / 2), GameManagement.DEVICE_SCREEN_HEIGHT - (eraserSize.x / 2));
                 Vector2 _spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(_randX, _randY));
                 RaycastHit2D hit2D = Physics2D.BoxCast(_spawnPos, Camera.main.ScreenToWorldPoint(eraserSize), 0.0f, Vector2.up);
                 Debug.DrawRay(_spawnPos, Vector3.forward, Color.red, 1f);

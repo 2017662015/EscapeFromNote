@@ -193,21 +193,6 @@ public class EnemyBehaviour : Character
             }
         }
     }
-    public void ClearAllBullet()
-    {
-        int i = 0;
-        do
-        {
-            if (bullets[i].activeSelf)
-            {
-                bullets[i].SetActive(false);
-                disabledBullets.Add(bullets[i]);
-                aliveBulletCount--;
-            }
-            i++;
-        } while (disabledBullets.Count != bullets.Count);
-        currentState = BehaviourState.IDLE;
-    }
     private int GetBulletSpawnPoses()
     {
         bulletSpawnPoses = new List<Transform>();
@@ -270,6 +255,7 @@ public class EnemyBehaviour : Character
         } while (disabledBullets.Count != bullets.Count - aliveBulletCount);
     }
     public void DecreaseAliveBulletCount() { aliveBulletCount--; }
+    public void CallClearAllBullet() { StartCoroutine(ClearAllBullet()); }
 
     //Coroutines
     private IEnumerator CheckStage()
@@ -334,6 +320,22 @@ public class EnemyBehaviour : Character
             yield return null;
         } while (aliveBulletCount != 0);
         currentState = BehaviourState.FINALIZE;
+    }
+    private IEnumerator ClearAllBullet()
+    {
+        int i = 0;
+        do
+        {
+            if (bullets[i].activeSelf)
+            {
+                bullets[i].SetActive(false);
+                disabledBullets.Add(bullets[i]);
+                aliveBulletCount--;
+            }
+            i++;
+            yield return null;
+        } while (disabledBullets.Count != bullets.Count);
+        currentState = BehaviourState.IDLE;
     }
 }
  

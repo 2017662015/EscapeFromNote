@@ -116,6 +116,7 @@ public class PlayerInf : Character
         checkEraserCount = null;
         checkState = null;
         isPencilCaseEquipped = false;
+        whiteSpawnElapsedTime = 0.0f;
         GameManagement.GetInstance().SetCurrentState(GameManagement.GameState.GAMEOVER);
         gameObject.SetActive(false);
     }
@@ -216,7 +217,7 @@ public class PlayerInf : Character
     {
         if(currentState != BehaviourState.INIT || currentState != BehaviourState.DIE)
         {
-            if (!isWhiteEquipped)
+            if (!isWhiteEquipped && PlayerManagement.GetInstance().GetCurrentState() == GameManagement.GameState.PLAY)
             {
                 whiteSpawnElapsedTime += Time.fixedDeltaTime;
                 if(whiteSpawnElapsedTime > PLAYER_WHITE_SPAWN_TIME)

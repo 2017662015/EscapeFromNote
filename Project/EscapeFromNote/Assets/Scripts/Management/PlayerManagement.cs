@@ -19,6 +19,9 @@ public class PlayerManagement : Manager<PlayerManagement> {
     //Constants
     private const float DELAY_INTERVAL_AFTER_SPAWN = 5.0f;
 
+    //Getter Methods
+    public GameManagement.GameState GetCurrentState() { return this.currentState; }
+
     //Setter Methods
     public void SetCurrentState(GameManagement.GameState state) { this.currentState = state; }
 

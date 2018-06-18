@@ -37,15 +37,25 @@ public class GameManagement : Manager<GameManagement> {
     private ItemManagement itemManagement;
     private ScoreManagement scoreManagement;
     private SoundManagement soundManagement;
+    private UIRoot uiRootComp;
 
     //Variables
     private GameState currentState;
     private GameState previousState;
 
+    //Constants
+    public static readonly int DEVICE_SCREEN_HEIGHT = Screen.height;
+    public static readonly int DEVICE_SCREEN_WIDTH = Screen.width;
+
     //Setter Methods
     public void SetCurrentState(GameState state) { currentState = state; }
     public GameState GetCurrentState() { return this.currentState; }
-
+    
+    private void Awake()
+    {
+        uiRoot = GameObject.Find("UI Root").transform;
+        uiRootComp = uiRoot.GetComponent<UIRoot>();
+    }
     //Unity Callback Methods
     protected override void OnEnable()
     {
@@ -59,7 +69,7 @@ public class GameManagement : Manager<GameManagement> {
     {
         prefab_walls = Resources.Load("Prefabs/Walls") as GameObject;
         prefab_background = Resources.Load("Prefabs/Background") as GameObject;
-        uiRoot = GameObject.Find("UI Root").transform;
+        
         currentState = GameState.INIT;
         previousState = GameState.NULL;
         stageManagement = StageManagement.GetInstance();
