@@ -36,6 +36,7 @@ public class PlayerInf : Character
 
     //Getters
     private bool GetIsWhiteEquipped() { return this.isWhiteEquipped; }
+    public int GetCurrentHP() { return this.hp; }
 
     //Unity Callback Methods
     private void OnEnable()
@@ -93,6 +94,7 @@ public class PlayerInf : Character
     protected override void OnSkill()
     {
         isWhiteEquipped = false;
+        currentState = BehaviourState.IDLE;
     }
     protected override void OnDamaged()
     {

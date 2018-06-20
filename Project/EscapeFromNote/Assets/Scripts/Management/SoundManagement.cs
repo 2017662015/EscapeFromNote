@@ -49,8 +49,11 @@ public class SoundManagement : Manager<SoundManagement> {
     }
     private void OnTitle()
     {
-        audioSource.clip = bgm_audio;
-        audioSource.Play();
+        if (audioSource.clip != bgm_audio)
+        {
+            audioSource.clip = bgm_audio;
+            audioSource.Play();
+        }
     }
 
     private IEnumerator CheckState()

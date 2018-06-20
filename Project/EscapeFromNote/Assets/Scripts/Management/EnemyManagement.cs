@@ -13,7 +13,7 @@ public class EnemyManagement : Manager<EnemyManagement> {
     private GameObject prefab_fountainPen;
 
     //Instances
-    private Vector2 enemySize = new Vector2(1, 1);
+    private Vector2 enemySize = new Vector2(20, 90);
     private Transform uiRoot;
     private StageManagement stageManagement;
     private List<GameObject> enemys;
@@ -27,6 +27,7 @@ public class EnemyManagement : Manager<EnemyManagement> {
     private int checkAttemptCount = 5;
     [SerializeField][Range(0.0f, 10.0f)]private float spawnDelay = 3.0f;
     private float delayFactor = 0.0f;
+    private float uiRootScale;
     private EnemyType currentEnemyType;
     private GameManagement.GameState currentState;
     private GameManagement.GameState previousState;
@@ -43,8 +44,7 @@ public class EnemyManagement : Manager<EnemyManagement> {
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(spawnPos, Camera.main.ScreenToWorldPoint(enemySize));
-        Debug.Log(Camera.main.ScreenToWorldPoint(enemySize));
+        Gizmos.DrawWireCube(spawnPos, enemySize * uiRootScale);
     }
     protected override void OnEnable()
     {
@@ -59,6 +59,7 @@ public class EnemyManagement : Manager<EnemyManagement> {
         prefab_ballPen = Resources.Load("Prefabs/BallPen") as GameObject;
         prefab_fountainPen = Resources.Load("Prefabs/FountainPen") as GameObject;
         uiRoot = GameObject.Find("UI Root").transform;
+        uiRootScale = uiRoot.lossyScale.x;
         stageManagement = StageManagement.GetInstance();
         currentState = GameManagement.GameState.INIT;
         previousState = GameManagement.GameState.NULL;
@@ -73,7 +74,7 @@ public class EnemyManagement : Manager<EnemyManagement> {
         MakeEnemys(enemyCountOfStage, currentStage);
         currentBehaviourState = Character.BehaviourState.IDLE;
     }
-    private void OnGameOver()
+    private void OnFinalize()
     {
         EnemyDestroy();
     }
@@ -126,11 +127,10 @@ public class EnemyManagement : Manager<EnemyManagement> {
         {
             do
             {
-                _randX = Random.Range(0 + enemySize.x, GameManagement.DEVICE_SCREEN_WIDTH - enemySize.x);
-                _randY = Random.Range(0 + enemySize.y, GameManagement.DEVICE_SCREEN_HEIGHT - enemySize.y);
+                _randX = Random.Range(0, GameManagement.DEVICE_SCREEN_WIDTH);
+                _randY = Random.Range(0, GameManagement.DEVICE_SCREEN_HEIGHT);
                 spawnPos = UICamera.mainCamera.ScreenToWorldPoint(new Vector2(_randX, _randY));
-                RaycastHit2D hit2D = Physics2D.BoxCast(spawnPos, UICamera.mainCamera.ScreenToWorldPoint(enemySize), 0.0f, Vector3.forward, Mathf.Infinity);
-                Debug.Log(UICamera.mainCamera.ScreenToWorldPoint(enemySize) * 2);
+                RaycastHit2D hit2D = Physics2D.BoxCast(spawnPos, enemySize * uiRootScale, 0.0f, Vector3.forward, Mathf.Infinity);
                 Debug.DrawRay(spawnPos, Vector3.forward, Color.red, 1f);
                 if (hit2D)
                 {
@@ -219,6 +219,7 @@ public class EnemyManagement : Manager<EnemyManagement> {
                     case GameManagement.GameState.INIT:
                         break;
                     case GameManagement.GameState.TITLE:
+                        enemyCountOfStage = 0;
                         break;
                     case GameManagement.GameState.OPTION_TITLE:
                         break;
@@ -234,9 +235,9 @@ public class EnemyManagement : Manager<EnemyManagement> {
                     case GameManagement.GameState.RESUME:
                         break;
                     case GameManagement.GameState.GAMEOVER:
-                        OnGameOver();
                         break;
                     case GameManagement.GameState.BACK_TO_TITLE:
+                        OnFinalize();
                         break;
                     case GameManagement.GameState.FINALIZE:
                         break;
@@ -283,11 +284,12 @@ public class EnemyManagement : Manager<EnemyManagement> {
     private IEnumerator SkillEnabled()
     {
         int i = 0;
+        GameObject.Find("Player").GetComponent<PlayerInf>().SetCurrentState(Character.BehaviourState.SKILL);
         do
         {
             if (enemys[i].activeSelf)
             {
-                enemys[i].GetComponent<EnemyBehaviour>().CallClearAllBullet();
+                enemys[i].GetComponent<EnemyBehaviour>().SetCurrentState(Character.BehaviourState.SKILL);
             }
             i++;
             yield return null;

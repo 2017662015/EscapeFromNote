@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 61359227089346808}
   - component: {fileID: 114718903758028216}
   m_Layer: 5
-  m_Name: Menu
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -716,7 +716,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 114811805656294462, guid: 15fe40614502421438ddf9456172efab, type: 2}
-  mText: Menu
+  mText: Title
   mFontSize: 65
   mFontStyle: 0
   mAlignment: 0

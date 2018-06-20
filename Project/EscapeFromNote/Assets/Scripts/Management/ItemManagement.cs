@@ -12,8 +12,9 @@ public class ItemManagement : Manager<ItemManagement> {
     private bool isPlayerPencilCaseEquipped;
     private int spawnedEraserCount = 0;
     private int checkAttemptCount = 5;
+    private float uiRootScale;
     private float currentTime;
-    private Vector2 eraserSize = new Vector2(25, 50);
+    private Vector2 eraserSize = new Vector2(20, 90);
     private GameManagement.GameState currentState;
     private GameManagement.GameState previousState;
 
@@ -22,6 +23,7 @@ public class ItemManagement : Manager<ItemManagement> {
 
     public void SetCurrentState(GameManagement.GameState state) { this.currentState = state; }
     public void SetIsPlayerPencilCaseEquipped(bool condition) { this.isPlayerPencilCaseEquipped = condition; }
+   
 
     protected override void OnEnable()
     {
@@ -39,6 +41,7 @@ public class ItemManagement : Manager<ItemManagement> {
         currentState = GameManagement.GameState.INIT;
         previousState = GameManagement.GameState.NULL;
         uiRoot = GameObject.Find("UI Root").transform;
+        uiRootScale = uiRoot.lossyScale.x;
         StartCoroutine(CheckState());
     }
 
@@ -59,7 +62,7 @@ public class ItemManagement : Manager<ItemManagement> {
                 _randX = Random.Range(0 + (eraserSize.x / 2), GameManagement.DEVICE_SCREEN_WIDTH - (eraserSize.x / 2));
                 _randY = Random.Range(0 + (eraserSize.y / 2), GameManagement.DEVICE_SCREEN_HEIGHT - (eraserSize.x / 2));
                 Vector2 _spawnPos = Camera.main.ScreenToWorldPoint(new Vector2(_randX, _randY));
-                RaycastHit2D hit2D = Physics2D.BoxCast(_spawnPos, Camera.main.ScreenToWorldPoint(eraserSize), 0.0f, Vector2.up);
+                RaycastHit2D hit2D = Physics2D.BoxCast(_spawnPos, eraserSize * uiRootScale, 0.0f, Vector2.up);
                 Debug.DrawRay(_spawnPos, Vector3.forward, Color.red, 1f);
                 if (hit2D)
                 {

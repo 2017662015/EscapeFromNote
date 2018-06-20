@@ -19,8 +19,10 @@ public class EnemyBehaviour : Character
     protected List<GameObject> disabledBullets;
     protected List<Transform> bulletSpawnPoses;
     protected StageManagement stageManagement;
+    protected Coroutine waitForFinalize;
 
     //Variables
+    protected bool isDie;
     protected bool isPencilCaseContained;
     protected int currentStage = 0;
     protected int bulletSpawnPosesCount;
@@ -32,6 +34,8 @@ public class EnemyBehaviour : Character
 
     //Constants
     protected float ENEMY_SPAWN_DELAY_LENGTH = 0.5f;
+    
+    public Character.BehaviourState GetCurrentState() { return this.currentState; }
 
     public void SetIsPencilCaseContained(bool condition) { this.isPencilCaseContained = condition; }
 
@@ -119,20 +123,30 @@ public class EnemyBehaviour : Character
     }
     protected override void OnSkill()
     {
-        ClearAllBullet();
+        StartCoroutine(ClearAllBullet());
+        Debug.Log("boxColl : " + boxColl.enabled);
+        if (!isDie)
+        {
+            currentState = BehaviourState.IDLE;
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
     protected override void OnDamaged()
     {
     }
     protected override void OnDie()
     {
+        isDie = true;
         if (isPencilCaseContained)
         {
-            Instantiate(prefab_item_pencilcase, Camera.main.WorldToScreenPoint(gameObject.transform.position), Quaternion.identity, uiRoot);
+            Instantiate(prefab_item_pencilcase, gameObject.transform.position, Quaternion.identity, uiRoot);
         }
         uiSprite.enabled = false;
         boxColl.enabled = false;
-        StartCoroutine(WaitForFinalize());
+        waitForFinalize = StartCoroutine(WaitForFinalize());
     }
     protected override void OnFinalize()
     {
@@ -333,8 +347,8 @@ public class EnemyBehaviour : Character
                 aliveBulletCount--;
             }
             i++;
-            yield return null;
-        } while (disabledBullets.Count != bullets.Count);
+        } while (i < bullets.Count);
+        yield return null;
         currentState = BehaviourState.IDLE;
     }
 }

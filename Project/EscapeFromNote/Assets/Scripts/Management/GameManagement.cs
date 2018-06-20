@@ -104,7 +104,9 @@ public class GameManagement : Manager<GameManagement> {
     }
     private void OnPause()
     {
-
+        Time.timeScale = 0;
+        Time.fixedDeltaTime = 0.0167f * Time.timeScale;
+        currentState = GameState.OPTION_PAUSE;
     }
     private void OnOptionPause()
     {
@@ -113,7 +115,9 @@ public class GameManagement : Manager<GameManagement> {
     private void OnExitTitle() { }
     private void OnResume()
     {
-
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.0167f * Time.timeScale;
+        currentState = GameState.PLAY;
     }
     private void OnGameOver()
     {
@@ -121,6 +125,9 @@ public class GameManagement : Manager<GameManagement> {
     }
     private void OnBackToTitle()
     {
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.0167f * Time.timeScale;
+        currentState = GameState.OPTION_PAUSE;
         DestroyWall();
         DestroyBackground();
         currentState = GameState.TITLE;
